@@ -1,0 +1,60 @@
+<div class="page">
+  <div class="top-bar">
+    <span class="logo">DataShare</span>
+    <button class="top-btn" routerLink="/login">Se connecter</button>
+  </div>
+
+  <div class="card download-card">
+    <h2>Télécharger un fichier</h2>
+
+    <!-- LOADING -->
+    <div *ngIf="!fileName && !error" class="loading">
+      Chargement des informations...
+    </div>
+
+    <!-- FILE INFO -->
+    <ng-container *ngIf="fileName && !error && isExpired===false">
+      <div class="file-row">
+        <i class="fa-regular fa-file-image"></i>
+        <div class="file-info">
+          <div class="file-name">{{ fileName }}</div>
+          <div class="file-size">{{ fileSize }}</div>
+        </div>
+      </div>
+      <div class="expiration-info" [ngClass]="{'expire-tomorrow': getRemainingDays(expiresAt) === 'demain'}">
+        <i
+          [class]="getRemainingDays(expiresAt) === 'demain' ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-info'"></i>
+        Ce fichier expirera {{ getRemainingDays(expiresAt) }}
+      </div>
+      <label>Mot de passe</label>
+      <input type="password"  name="password"
+        placeholder="Saisissez votre mot de passe..." required>
+      <!-- DOWNLOAD BUTTON -->
+      <button class="download-btn" (click)="download()" [disabled]="!token">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+        Télécharger
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isExpired===true">
+      <div class="expiration-complet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-octagon-alert">
+          <path d="M7.86 2h8.28l5 5v8.28l-5 5H7.86l-5-5V7.86l5-5z"></path>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12" y2="16"></line>
+        </svg>
+        Ce fichier n'est plus disponible en téléchargement car il a expiré.
+      </div>
+    </ng-container>
+
+    <!-- ERROR -->
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+
+    <!-- SUCCESS -->
+    <div *ngIf="success" class="success">
+      {{ success }}
+    </div>
+  </div>
+</div>

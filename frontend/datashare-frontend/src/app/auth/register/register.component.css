@@ -1,0 +1,199 @@
+/* Background full screen */
+.page {
+    height: 115vh;
+    background: linear-gradient(172.84deg, #FFB88C 2.29%, #DE6262 97.71%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+/* Top bar */
+.top-bar {
+    position: absolute;
+    top: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.top-btn {
+    background: #2f2f2f;
+    color: rgba(243, 238, 234, 1);
+font-weight: 400;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    inline-size: fit-content;
+}
+
+/* Card */
+.card {
+    background: rgba(255, 255, 255, 1);
+    padding: 25px;
+    border-radius: 12px;
+    width: 300px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+/* Title */
+.card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+label {
+    font-size: 12px;
+    }
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+}
+
+/* Link */
+.link {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #d6604d;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+   background: rgba(255, 129, 45, 0.13);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: rgba(226, 127, 41, 1);
+}
+
+button:hover {
+    background: #d9b8a7;
+    
+}
+
+/* Error */
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.upload-circle {
+    width: 96px;
+    height: 96px;
+    background: rgba(16, 2, 24, 1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+
+    margin-top: 30px;
+
+}
+
+.upload-form {
+    width: 350px;
+    max-width: 90vw;
+}
+
+.file-upload-area {
+    border: 3px dashed #e6cfc2;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: white;
+}
+
+.file-label {
+    display: inline-block;
+    background: #e6cfc2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.file-label input {
+    display: none;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.home {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.home p {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.upload-circle {
+    cursor: pointer;
+}
+
+.img_televerser{
+    background: content-box;
+}
+.file-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+  inline-size: max-content;
+}
+.link-btn{
+    color: rgba(226, 127, 41, 1);
+    background-color: white;
+}
+@media (max-width: 480px) {
+    .card {
+        width: 80%;
+      }
+}

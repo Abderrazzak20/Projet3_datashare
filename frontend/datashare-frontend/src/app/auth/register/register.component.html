@@ -1,0 +1,33 @@
+<div class="page">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <span class="logo">DataShare</span>
+        <button class="top-btn" routerLink="/login">Se connecter</button>
+    </div>
+
+    <!-- Card Registrazione -->
+    <div class="card register-form">
+        <h2>Créer un compte</h2>
+        <form (ngSubmit)="onSubmitRegister()" #regForm="ngForm">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="registerData.login" name="login" placeholder="Saisissez votre email..."
+                required>
+
+            <label>Mot de passe</label>
+            <input type="password" [(ngModel)]="registerData.password" name="password"
+                placeholder="Saisissez votre mot de passe..." required>
+
+            <label>Vérification du mot de passe</label>
+            <input type="password" [(ngModel)]="registerData.passwordConfirm" name="passwordConfirm"
+                placeholder="Saisissez-le à nouveau" required>
+
+            <button type="button" class="link-btn" (click)="goToLogin()">
+                J'ai déjà un compte
+            </button>
+            <button type="submit" [disabled]="regForm.invalid">Créer mon compte</button>
+        </form>
+
+        <p class="success" *ngIf="success">{{ success }}</p>
+        <p class="error" *ngIf="error">{{ error }}</p>
+    </div>
+</div>

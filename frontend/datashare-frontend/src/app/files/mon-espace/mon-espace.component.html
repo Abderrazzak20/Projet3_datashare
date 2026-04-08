@@ -1,0 +1,17 @@
+<div class="page">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <span class="logo">DataShare</span>
+    <button class="top-btn" (click)="toDasheboeard()">Mon espace</button>
+  </div>
+
+  <!-- Home iniziale -->
+  <div *ngIf="!showLogin" class="home">
+    <p>Tu veux partager un fichier ?</p>
+    <div class="upload-circle" (click)="goToUpload()">
+      <img src="assets/Test2.png" alt="upload">
+    </div>
+  </div>
+
+ 
+</div>

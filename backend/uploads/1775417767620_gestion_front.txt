@@ -1,0 +1,33 @@
+src/app/
+│
+├── auth/
+│   ├── login/
+│   │   ├── login.component.ts
+│   │   ├── login.component.html
+│   │   └── login.component.scss
+│   ├── register/
+│       ├── register.component.ts
+│       ├── register.component.html
+│       └── register.component.scss
+│
+├── files/
+│   ├── upload/
+│   │   ├── upload.component.ts
+│   │   ├── upload.component.html
+│   │   └── upload.component.scss
+│   ├── history/
+│       ├── history.component.ts
+│       ├── history.component.html
+│       └── history.component.scss
+│
+├── services/
+│   ├── auth.service.ts
+│   └── file.service.ts
+│
+├── interceptors/
+│   └── jwt.interceptor.ts
+├── guards/
+│   └── auth.guard.ts
+│
+├── app-routing.module.ts
+└── app.module.ts

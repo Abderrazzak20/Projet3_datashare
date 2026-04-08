@@ -1,0 +1,165 @@
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffb48a 0%, #de6464 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  position: relative;
+  padding: 24px;
+}
+
+.top-bar {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 22px;
+  color: #111;
+}
+
+.top-btn {
+  background: #303030;
+  color: #f3f0ec;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.card {
+  width: 430px;
+  max-width: 92vw;
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 24px 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+.card h2 {
+  text-align: center;
+  font-size: 22px;
+  margin: 0 0 22px;
+  color: #111;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.file-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-name {
+  font-size: 13px;
+  color: #222;
+  word-break: break-word;
+}
+
+.file-size {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.expiration-info {
+  background: rgba(226, 236, 255, 1);
+  color:  rgba(42, 63, 114, 1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  margin: 10px 0 16px;
+  border: 1px solid #c8d9ff;
+}
+
+.expiration-complet {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 230, 230, 1); /* leggero rosso chiaro */
+  color: rgba(198, 40, 40, 1);        /* rosso intenso */
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 180, 180, 1);
+}
+.expiration-complett svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: rgba(198, 40, 40, 1);  /* colore rosso dell’icona */
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+input[type="password"] {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 11px 12px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+.download-btn {
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  padding: 12px;
+  background: #ededed;
+  color: rgba(186, 104, 31, 1);
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  filter: brightness(0.98);
+}
+
+.error {
+  color: #c62828;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.success {
+  color: #2e7d32;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+.expire-tomorrow{
+  color: rgba(170, 100, 43, 1);
+}
+.lucide.lucide-octagon-alert{
+  flex-shrink: 0;
+}
