@@ -28,7 +28,7 @@ public class JwtServiceTest {
 		jwtServ= new JwtService(userRepository);
 		Field field=JwtService.class.getDeclaredField("SECRET_KEY");
 		field.setAccessible(true);
-		field.set(jwtServ, "mysecret1234567890AZERTYUIOP");
+		field.set(jwtServ, "mysecret1234567890AZERTYUIOPSDFGHJKLWXCVBN?NKIU");
 		
 	}
 	@Test
