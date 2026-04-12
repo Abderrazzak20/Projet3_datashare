@@ -10,7 +10,7 @@
         <h2>Créer un compte</h2>
         <form (ngSubmit)="onSubmitRegister()" #regForm="ngForm">
             <label>Email</label>
-            <input type="email" [(ngModel)]="registerData.login" name="login" placeholder="Saisissez votre email..."
+            <input type="email" [(ngModel)]="registerData.email" name="email" placeholder="Saisissez votre email..."
                 required>
 
             <label>Mot de passe</label>

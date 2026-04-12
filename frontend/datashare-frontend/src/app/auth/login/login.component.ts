@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginData: LoginRequest = { login: '', password: '' };
+  loginData: LoginRequest = { email: '', password: '' };
   error: string = '';
   showLogin = false; // gestisce se mostrare la card login
 
