@@ -28,12 +28,12 @@ public class TestFileE2E {
 	void fullDownloadClien() throws Exception {
 		String loginRequest = """
 				{
-				"login":"mario@gmail.com",
+				"email":"mario@gmail.com",
 				"password":"pass123"
 				}
 				""";
 		SignupRequest signup = new SignupRequest();
-		signup.setLogin("mario@gmail.com");
+		signup.setEmail("mario@gmail.com");
 		signup.setPassword("pass123");
 		mockMvc.perform(post("/api/register").contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(signup))).andExpect(status().isOk());
@@ -60,7 +60,7 @@ public class TestFileE2E {
 	@Test
 	void testLoginFail() throws Exception {
 		SignupRequest signup = new SignupRequest();
-		signup.setLogin("Test@gmail.com");
+		signup.setEmail("Test@gmail.com");
 		signup.setPassword("pass123");
 		mockMvc.perform(post("/api/register").contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(signup))).andExpect(status().isOk());

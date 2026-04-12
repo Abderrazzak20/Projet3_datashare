@@ -33,7 +33,7 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        User user = userRepository.findByLogin(userDetails.getUsername())
+        User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
 
         return Jwts.builder()
@@ -47,7 +47,7 @@ public class JwtService {
 
     public String generateTokenRegister(User user) {
         return Jwts.builder()
-                .setSubject(user.getLogin())
+                .setSubject(user.getEmail())
                 .claim("id", user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))

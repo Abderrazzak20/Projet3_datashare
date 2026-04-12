@@ -35,14 +35,14 @@ public class JwtServiceTest {
 	void testGenerateToken() {
 		User user= new User();
 		user.setId(1L);
-		user.setLogin("Mario");
+		user.setEmail("Mario@gmail.com");
 		UserDetails userDetails=org.springframework.security.core.userdetails.User
-				.withUsername("Mario")
+				.withUsername("Mario@gmail.com")
 				.password("password")
 				.authorities("USER")
 				.build();
 		
-		when(userRepository.findByLogin("Mario")).thenReturn(Optional.of(user));
+		when(userRepository.findByEmail("Mario@gmail.com")).thenReturn(Optional.of(user));
 		String token=jwtServ.generateToken(userDetails);
 		assertNotNull(token);			
 	}
@@ -50,19 +50,19 @@ public class JwtServiceTest {
 	void testExtractLogin() {
 		User user= new User();
 		user.setId(1L);
-		user.setLogin("mario");
+		user.setEmail("mario@gmail.com");
 		
 		String token=jwtServ.generateTokenRegister(user);
 		String login = jwtServ.extractLogin(token);
-		assertEquals("mario",login);
+		assertEquals("Mario@gmail.com",login);
 	}
 	@Test
 	void testTokenValid() {
 		User user= new User();
 		user.setId(1L);
-		user.setLogin("Mario");
+		user.setEmail("Mario@gmail.com");
 		String token = jwtServ.generateTokenRegister(user);
-		boolean valid=jwtServ.isTokenValid(token, "Mario");
+		boolean valid=jwtServ.isTokenValid(token, "Mario@gmail.com");
 		assertTrue(valid);
 	}
 	
@@ -70,9 +70,9 @@ public class JwtServiceTest {
 	void testTokenInvalidLogin() {
 		User user= new User();
 		user.setId(1L);
-		user.setLogin("Bad");
+		user.setEmail("Bad@gmail.com");
 		String token = jwtServ.generateTokenRegister(user);
-		boolean valid=jwtServ.isTokenValid(token, "Mario");
+		boolean valid=jwtServ.isTokenValid(token, "Mario@gmail.com");
 		assertFalse(valid);
 	}
 

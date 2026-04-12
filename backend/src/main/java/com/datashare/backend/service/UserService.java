@@ -26,27 +26,27 @@ public class UserService {
     // REGISTRAZIONE
     public void register(SignupRequest signupRequest) {
         Assert.notNull(signupRequest, "SignupRequest must not be null");
-        log.info("Registering new user: {}", signupRequest.getLogin());
+        log.info("Registering new user: {}", signupRequest.getEmail());
 
         // Controlla se l'utente esiste già
-        if (userRepository.findByLogin(signupRequest.getLogin()).isPresent()) {
-            throw new IllegalArgumentException("User with login " + signupRequest.getLogin() + " already exists");
+        if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("User with login " + signupRequest.getEmail() + " already exists");
         }
 
         // Crea e salva nuovo utente
         User user = new User();
-        user.setLogin(signupRequest.getLogin());
+        user.setEmail(signupRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
         userRepository.save(user);
-        log.info("User {} registered successfully", signupRequest.getLogin());
+        log.info("User {} registered successfully", signupRequest.getEmail());
     }
 
 
     public jwtResponse login(loginRequest loginRequest) {
-        Assert.notNull(loginRequest.getLogin(), "login must not be null");
+        Assert.notNull(loginRequest.getEmail(), "login must not be null");
         Assert.notNull(loginRequest.getPassword(), "Password must not be null");
 
-        User dbUser = userRepository.findByLogin(loginRequest.getLogin())
+        User dbUser = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
 
       
@@ -56,7 +56,7 @@ public class UserService {
 
    
         String token = jwtService.generateTokenRegister(dbUser);
-        log.info("User {} logged in successfully", dbUser.getLogin());
+        log.info("User {} logged in successfully", dbUser.getEmail());
 
         return new jwtResponse(token);
     }

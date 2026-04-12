@@ -36,10 +36,10 @@ class UserServiceTest {
     @Test
     void testRegisterSuccess() {
         SignupRequest request = new SignupRequest();
-        request.setLogin("mario");
+        request.setEmail("mario@gmail.com");
         request.setPassword("pass123");
 
-        when(userRepository.findByLogin("mario")).thenReturn(Optional.empty());
+        when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("pass123")).thenReturn("encodedPass");
 
         userService.register(request);
@@ -50,9 +50,9 @@ class UserServiceTest {
     @Test
     void testRegisterAlreadyExists() {
         SignupRequest request = new SignupRequest();
-        request.setLogin("mario");
+        request.setEmail("mario@gmail.com");
 
-        when(userRepository.findByLogin("mario")).thenReturn(Optional.of(new User()));
+        when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(new User()));
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.register(request));
         assertEquals("User with login mario already exists", exception.getMessage());
@@ -61,14 +61,14 @@ class UserServiceTest {
     @Test
     void testLoginSuccess() {
         loginRequest request = new loginRequest();
-        request.setLogin("mario");
+        request.setEmail("mario@gmail.com");
         request.setPassword("pass123");
 
         User user = new User();
-        user.setLogin("mario");
+        user.setEmail("mario@gmail.com");
         user.setPassword("encodedPass");
 
-        when(userRepository.findByLogin("mario")).thenReturn(Optional.of(user));
+        when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("pass123", "encodedPass")).thenReturn(true);
         when(jwtService.generateTokenRegister(user)).thenReturn("token123");
 
@@ -79,14 +79,14 @@ class UserServiceTest {
     @Test
     void testLoginInvalidPassword() {
         loginRequest request = new loginRequest();
-        request.setLogin("mario");
+        request.setEmail("mario@gmail.com");
         request.setPassword("wrong");
 
         User user = new User();
-        user.setLogin("mario");
+        user.setEmail("mario@gmail.com");
         user.setPassword("encodedPass");
 
-        when(userRepository.findByLogin("mario")).thenReturn(Optional.of(user));
+        when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("wrong", "encodedPass")).thenReturn(false);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.login(request));
@@ -96,10 +96,10 @@ class UserServiceTest {
     @Test
     void testLoginUserNotFound() {
         loginRequest request = new loginRequest();
-        request.setLogin("mario");
+        request.setEmail("mario@gmail.com");
         request.setPassword("pass123");
 
-        when(userRepository.findByLogin("mario")).thenReturn(Optional.empty());
+        when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.empty());
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.login(request));
         assertEquals("Invalid credentials", exception.getMessage());
