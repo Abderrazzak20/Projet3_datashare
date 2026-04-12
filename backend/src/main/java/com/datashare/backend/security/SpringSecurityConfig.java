@@ -57,6 +57,7 @@ public class SpringSecurityConfig {
             .authenticationProvider(daoAuthenticationProvider())
             .authorizeHttpRequests(auth -> auth
               .requestMatchers("/api/register", "/api/login","/api/files/download/**").permitAll()
+              .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(new JwtAuthenticationFilter(jwtService, customUserDetailService),

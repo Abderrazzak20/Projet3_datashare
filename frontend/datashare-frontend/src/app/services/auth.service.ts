@@ -10,10 +10,10 @@ export class AuthService {
  private baseUrl = 'http://localhost:8080/api'; // backend Spring Boot
   private tokenKey = 'token';
   constructor(private http: HttpClient) { }
-   register(data: { login: string; password: string }): Observable<{ message: string }> {
+   register(data: { email: string; password: string }): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.baseUrl}/register`, data);
   }
-  login(data: { login: string; password: string }): Observable<JwtResponse> {
+  login(data: { email: string; password: string }): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(`${this.baseUrl}/login`, data);
   }
   saveToken(token: string): void {

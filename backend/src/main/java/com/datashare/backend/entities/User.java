@@ -21,7 +21,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,9 +42,12 @@ public class User implements UserDetails {
     private Long id; 
     @NotBlank
     @Column(unique = true)
-    private String login;
+	@NotBlank
+	@Email(message = "email invalide")
+    private String email;
 
     @NotBlank
+	@Size(min = 8,message = "mot de passe minimum 8 character")
     private String password;
 
     @CreationTimestamp
@@ -61,7 +66,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login; 
+        return email; 
     }
 
     @Override

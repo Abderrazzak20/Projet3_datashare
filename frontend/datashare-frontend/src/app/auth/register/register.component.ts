@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  registerData: SignupRequest & { passwordConfirm?: string } = { login: '', password: '', passwordConfirm: '' };
+  registerData: SignupRequest & { passwordConfirm?: string } = { email: '', password: '', passwordConfirm: '' };
   success: string = '';
   error: string = '';
 
@@ -26,7 +26,7 @@ export class RegisterComponent {
     }
 
     const payload = {
-      login:this.registerData.login,
+      email:this.registerData.email,
       password:this.registerData.password
     };
     this.auth.register(payload).subscribe({

@@ -18,7 +18,7 @@
     <h2>Connexion</h2>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <label>Email</label>
-      <input type="email" [(ngModel)]="loginData.login" name="login" placeholder="Saisissez votre email..." required>
+      <input type="email" [(ngModel)]="loginData.email" name="email" placeholder="Saisissez votre email..." required>
 
       <label>Mot de passe</label>
       <input type="password" [(ngModel)]="loginData.password" name="password"
