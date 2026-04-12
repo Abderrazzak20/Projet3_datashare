@@ -64,3 +64,9 @@ Toutes les entrées utilisateur sont validées avec `jakarta.validation` :
 
 - CORS est configuré pour autoriser uniquement les origines autorisées
 - Empêche les appels non autorisés depuis des domaines externes
+
+## 8. Frontend Security
+
+- Le token JWT est stocké dans le localStorage
+- Les requêtes API incluent automatiquement le token via HttpHeaders
+- Les routes sensibles sont protégées par un AuthGuard
