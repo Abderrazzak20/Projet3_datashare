@@ -2,55 +2,31 @@
 
 ## 📖 Description
 
-DataShare est une application web permettant aux utilisateurs de téléverser des fichiers et de les partager via des liens de téléchargement temporaires.
-
-La plateforme propose :
-
-* Une authentification sécurisée (JWT)
-* Le téléversement et téléchargement de fichiers via des tokens uniques
-* La gestion de l’expiration des fichiers
-* Un historique des fichiers utilisateur
-* La suppression des fichiers
+DataShare est une application web permettant de téléverser et partager des fichiers via des liens de téléchargement temporaires.
 
 ---
 
-## 🚀 Fonctionnalités
+## 🔢 Versions utilisées
 
-### 👤 Authentification
+### Frontend
+- Angular 19.2.0
+- Angular CLI 19.2.22
+- TypeScript 5.7.2
+- Node.js 20.20.0
+- npm 10.8.2
 
-* Création de compte
-* Connexion avec JWT
+### Backend
+- Java 17
+- Spring Boot 3.5.0
+- Spring Security
+- Spring Data JPA
+- JWT 0.11.5
+- Springdoc OpenAPI 2.8.6
 
-### 📤 Téléversement de fichier
+### Database
+- PostgreSQL (utilisé avec pgAdmin)
 
-* Upload de fichiers (max 1GB)
-* Génération d’un lien unique
-* Définition d’une expiration (1 à 7 jours)
-
-### 📥 Téléchargement
-
-* Téléchargement via token
-* Téléchargement via lien
-
-### 📂 Gestion des fichiers
-
-* Consultation de l’historique
-* Suppression des fichiers
-
----
-
-## 🛠️ Stack technique
-
-* **Back-end** : Spring Boot 
-* **Front-end** : Angular
-* **Sécurité** : Spring Security + JWT
-* **Base de données** : PostgreSQL et H2 pour les test E2E
-* **Stockage** : système de fichiers local
-* **Tests** : JUnit + MockMvc
-
----
-
-## ⚙️ Installation et exécution
+## 🛠️ Installation
 
 ### 1. Cloner le repository
 
@@ -63,66 +39,39 @@ cd datashare
 
 ### 2. Configuration
 
-Définir les variables d’environnement :
+Créer un fichier `.env` et définir les variables suivantes :
 
 ```bash
-JWT_SECRET_KEY=cles pour le token
+JWT_SECRET_KEY=your_secret_key
+JWT_EXPIRATION=3600000
+
+DB_URL=jdbc:postgresql://localhost:5432/datashare
+DB_USER=identifiant_base
+DB_PASSWORD=mot_de_passe
 ```
-JWT_EXPIRATION=le temp avant que le token expire
----
-DB_USER=le nome de la base de donne
----
-DB_PASSWORD=le mot de passe de la base de donne
+
 ---
 
-### 3. Lancer l’application
+## ▶️ Lancement de l’application
+
+### 🔧 Backend (Spring Boot)
 
 ```bash
 mvn spring-boot:run
 ```
 
-Application disponible sur :
-
-```
+Backend disponible sur :  
 http://localhost:8080
-```
 
 ---
 
-## 🔐 Authentification
-
-Les endpoints protégés nécessitent :
-
-```
-Authorization: Bearer <JWT_TOKEN>
-```
-
-
-## 🧪 Tests
-
-Lancer les tests :
+### 💻 Frontend (Angular)
 
 ```bash
-mvn test
+cd frontend
+npm install
+npm start
 ```
 
-Contenu :
-
-* Tests end-to-end :
-
-  * inscription + connexion
-  * échec de connexion
-  * upload + téléchargement
-
-Couverture : ~74%
-
----
-
-## 🔒 Sécurité
-
-* Mots de passe hashés avec BCrypt
-* Authentification JWT
-* Validation des fichiers :
-
-  * taille max : 1GB
-  * extensions interdites (.exe, .bat, .sh)
+Frontend disponible sur :  
+http://localhost:4200
