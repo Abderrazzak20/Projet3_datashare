@@ -35,8 +35,6 @@ Authorization: Bearer <token>
 - Chaque fichier possède un "token unique de téléchargement"
 - Les fichiers ne sont pas accessibles directement via URL
 - Les fichiers peuvent expirer après une durée définie
-- Les fichiers expirés sont automatiquement refusés
-
 ---
 
 ## 5. Input Validation
@@ -45,7 +43,6 @@ Toutes les entrées utilisateur sont validées avec `jakarta.validation` :
 
 - email valide obligatoire
 - mot de passe minimum 8 caractères
-- contrôle sur les fichiers uploadés
 
 ---
 

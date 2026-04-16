@@ -57,6 +57,7 @@ Les tests sont réalisés via :
 
 - [ ] Email invalide rejeté
 - [ ] Mot de passe inférieur à 8 caractères rejeté
+- [ ] Type d'extension incorrect
 - [ ] Données invalides → réponse 400
 
 ---
