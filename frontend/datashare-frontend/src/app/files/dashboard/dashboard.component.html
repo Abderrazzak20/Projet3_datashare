@@ -77,24 +77,32 @@
           <!-- RIGHT ACTIONS -->
           <div class="actions">
 
-            <!-- BOTTONE 3 PUNTI -->
-            <button class="menu-dots" (click)="toggleMenu(file.id)">
-              ⋮
-            </button>
-
-            <!-- MENU DROPDOWN -->
-            <div class="dropdown" *ngIf="openMenuId === file.id">
-
-              <button (click)="deleteFile(file.id)">
-                <i class="fa-solid fa-trash"></i>
+            <!-- VERSIONE DESKTOP -->
+            <div class="desktop-actions">
+              <button class="delete" (click)="deleteFile(file.id)">
                 Supprimer
               </button>
 
-              <button (click)="goToDownload(file.downloadToken)">
-                <i class="fa-solid fa-arrow-right"></i>
+              <button class="access" (click)="goToDownload(file.downloadToken)">
                 Accéder
               </button>
+            </div>
 
+            <!-- VERSIONE MOBILE  -->
+            <div class="mobile-actions">
+              <button class="menu-dots" (click)="toggleMenu(file.id)">
+                ⋮
+              </button>
+
+              <div class="dropdown" *ngIf="openMenuId === file.id">
+                <button (click)="deleteFile(file.id)">
+                  Supprimer
+                </button>
+
+                <button (click)="goToDownload(file.downloadToken)">
+                  Accéder
+                </button>
+              </div>
             </div>
 
           </div>

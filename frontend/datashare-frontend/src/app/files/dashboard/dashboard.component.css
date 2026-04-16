@@ -216,6 +216,14 @@
   height: 100%;
   z-index: 999;
 }
+.mobile-actions {
+  display: none;
+}
+
+.desktop-actions {
+  display: flex;
+  gap: 10px;
+}
 
 /* ========================= */
 /* 📱 MOBILE */
@@ -225,6 +233,17 @@
   /* Layout verticale */
   .layout {
     flex-direction: column;
+  }
+   .desktop-actions {
+    display: none;
+  }
+ .dropdown button {
+    padding: 4px 8px;   /* meno spazio interno */
+    font-size: 12px;    /* testo più piccolo */
+  }
+
+  .mobile-actions {
+    display: table-column;
   }
 
   /* SIDEBAR → drawer */
