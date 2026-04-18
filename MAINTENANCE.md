@@ -17,7 +17,6 @@ Ce document décrit les procédures de maintenance de l’application DataShare,
 Les dépendances Maven doivent être mises à jour régulièrement :
 
 - Vérification mensuelle des nouvelles versions
-- Mise à jour via `mvn versions:display-dependency-updates`
 - Mise à jour progressive (éviter les changements majeurs simultanés)
 
 **Procédure :**
