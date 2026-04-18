@@ -39,12 +39,12 @@ goToDasheboard(){
     this.auth.login(this.loginData).subscribe({
       next: (res: JwtResponse) => {
         this.auth.saveToken(res.token);
-        this.router.navigate(['/mon-espace']);
+        this.router.navigate(['mon-espace']);
       },
       error: (err) => {
-        this.error = 'Credenziali non valide';
+        this.error = 'credenziali non valide';
         console.error(err);
-        alert("Mauvaise credentiale");
+        alert("Mauvaise credenziale");
       }
     });
   }
