@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Leggi l'header Authorization
+     
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -41,14 +41,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authHeader.substring(7);
 
         try {
-            // Estrai il login dall’JWT
+          
             String login = jwtService.extractLogin(token); 
 
             if (login != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(login);
 
-                // Controlla se il token è valido
+               
                 if (jwtService.isTokenValid(token, userDetails.getUsername())) {
 
                     UsernamePasswordAuthenticationToken authToken =

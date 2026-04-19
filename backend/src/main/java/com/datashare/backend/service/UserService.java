@@ -23,17 +23,17 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    // REGISTRAZIONE
+   
     public void register(SignupRequest signupRequest) {
         Assert.notNull(signupRequest, "SignupRequest must not be null");
         log.info("Registering new user: {}", signupRequest.getEmail());
 
-        // Controlla se l'utente esiste già
+       
         if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
             throw new IllegalArgumentException("User with login " + signupRequest.getEmail() + " already exists");
         }
 
-        // Crea e salva nuovo utente
+       
         User user = new User();
         user.setEmail(signupRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
