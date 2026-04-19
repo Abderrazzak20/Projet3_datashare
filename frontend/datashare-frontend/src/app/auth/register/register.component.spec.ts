@@ -37,12 +37,12 @@ describe('RegisterComponent', () => {
   it('should show error if password is not correct', () => {
     component.registerData={
       email:"test@gmail.com",
-      password:"123",
-      passwordConfirm:"notsame"
+      password:"password123",
+      passwordConfirm:"notsame12"
     };
 
     component.onSubmitRegister();
-    expect(component.error).toBe("Les mots de passe ne correspondent pas !");
+    expect(component.error).toBe("Les mots de passe ne correspondent pas");
     expect(authSpy.register).not.toHaveBeenCalled();
   });
   it('should register success', () => {
@@ -69,7 +69,6 @@ describe('RegisterComponent', () => {
   it('should navigate to login', () => {
     component.goToLogin();
     expect(true).toBeTrue();
-   // expect(routeSpy.navigate).toHaveBeenCalledWith(["/login"]);
   });
   
   
