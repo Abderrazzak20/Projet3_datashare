@@ -75,3 +75,22 @@ npm start
 
 Frontend disponible sur :  
 http://localhost:4200
+## 🚀 Script de déploiement
+
+Un script bash est disponible pour lancer rapidement l’application (backend + frontend).
+
+### ▶️ Exécution
+
+```bash
+chmod +x deploy.sh
+./deploy.sh
+
+Description
+
+Ce script :
+
+démarre le backend Spring Boot
+installe les dépendances du frontend
+lance l’application Angular
+
+⚠️ Assurez-vous que PostgreSQL est démarré avant l’exécution.
