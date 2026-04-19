@@ -6,11 +6,11 @@
     <button class="top-btn" routerLink="/login">Se connecter</button>
   </div>
 
-  <!-- Upload Card -->
+
   <div class="card upload-form">
     <h2>Ajouter un fichier</h2>
 
-    <!-- Form upload -->
+   
     <form *ngIf="!uploadedFile" (ngSubmit)="uploadFile()">
       <div class="file-upload-area">
         <label class="file-label" *ngIf="!selectedFile">
@@ -45,7 +45,7 @@
         <img src="televerser2.png" alt="televerser" class="upload-icon">
       </button>
     </form>
-    <!-- Messaggio upload completato -->
+ 
     <div *ngIf="uploadedFile" class="upload-success">
       <div class="icon_succes">
         <i class="fa-regular fa-file-image"></i>

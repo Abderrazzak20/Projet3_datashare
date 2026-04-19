@@ -65,7 +65,7 @@ describe('LoginComponent', () => {
     spyOn(window,"alert");
       authSpy.login.and.returnValue(throwError(()=>new Error("erro")));
       component.onSubmit();
-      expect(component.error).toBe("credenziali non valide");
+      expect(component.error).toBe("Identifiants invalides");
       expect(window.alert).toHaveBeenCalledWith("Mauvaise credenziale");
   });
   

@@ -1,11 +1,11 @@
-/* Layout */
+
 .layout {
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
 }
 
-/* Sidebar */
+
 .sidebar {
   width: 220px;
   background: linear-gradient(#f6a57a, #e57373);
@@ -37,13 +37,13 @@
 }
 
 
-/* Main */
+
 .main {
   flex: 1;
   background: #f5f5f5;
 }
 
-/* Topbar */
+
 .topbar {
   display: flex;
   justify-content: flex-end;
@@ -71,7 +71,7 @@
 
 }
 
-/* Content */
+
 .content {
   padding: 20px;
 }
@@ -84,7 +84,7 @@
    border: 1px solid rgba(255, 165, 105, 1);
 }
 
-/* BOTTONI */
+
 .filters button {
   border: none;
   background: transparent;
@@ -98,18 +98,18 @@
 
 }
 
-/* ATTIVO */
+
 .filters button.active {
   background: #e57373;
   color: white;
 }
 
-/* File list */
+
 .file-list {
   margin-top: 20px;
 }
 
-/* File item */
+
 .file-item {
   display: flex;
   justify-content: space-between;
@@ -121,7 +121,7 @@
   margin-bottom: 10px;
 }
 
-/* File info */
+
 .file-info {
   display: flex;
   gap: 10px;
@@ -137,19 +137,19 @@
   color: red;
 }
 
-/* Actions */
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
 
 .actions {
   display: flex;
   gap: 10px;
 }
 
-/* BASE BUTTON */
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+
 .actions button {
   padding: 6px 14px;
   border-radius: 11px 11px 11px 11px;
@@ -160,7 +160,7 @@
   color:  rgba(255, 165, 105, 1);
 }
 
-/* DELETE */
+
 .delete {
   border: 1px solid #f4a261;
   background: #fff7f2;
@@ -172,7 +172,7 @@
   color: white;
 }
 
-/* ACCESS */
+
 .access {
   border: 1px solid #f4a261;
   background: transparent;
@@ -184,7 +184,7 @@
   color: white;
 }
 
-/* DISABLED */
+
 .access:disabled {
   border: 1px solid #ccc;
   color: #ccc;
@@ -198,7 +198,7 @@
   font-style: Regular;
 
 }
-/* HAMBURGER */
+
 .menu-toggle {
   display: none;
   font-size: 22px;
@@ -207,7 +207,7 @@
   cursor: pointer;
 }
 
-/* OVERLAY */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -225,12 +225,9 @@
   gap: 10px;
 }
 
-/* ========================= */
-/* 📱 MOBILE */
-/* ========================= */
 @media (max-width: 768px) {
 
-  /* Layout verticale */
+
   .layout {
     flex-direction: column;
   }
@@ -238,15 +235,15 @@
     display: none;
   }
  .dropdown button {
-    padding: 4px 8px;   /* meno spazio interno */
-    font-size: 12px;    /* testo più piccolo */
+    padding: 4px 8px;   
+    font-size: 12px;   
   }
 
   .mobile-actions {
     display: table-column;
   }
 
-  /* SIDEBAR → drawer */
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -261,17 +258,17 @@
     left: 0;
   }
 
-  /* Mostra hamburger */
+ 
   .menu-toggle {
     display: block;
   }
 
-  /* Topbar */
+
   .topbar {
     justify-content: space-between;
   }
 
-  /* FILE ITEM */
+ 
   .file-item {
    
     align-items: flex-start;
@@ -284,7 +281,6 @@
   }
 
 
-  /* Filtri scroll */
   .filters {
     width: 100%;
     overflow-x: auto;

@@ -1,6 +1,6 @@
 <div class="layout">
 
-  <!-- SIDEBAR -->
+ 
   <aside class="sidebar" [class.open]="isSidebarOpen">
     <div class="overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>
     <h1 class="logo">DataShare</h1>
@@ -10,13 +10,13 @@
     </button>
   </aside>
 
-  <!-- MAIN -->
+
   <div class="main">
 
-    <!-- TOP BAR -->
+  
     <div class="topbar">
 
-      <!-- HAMBURGER -->
+    
       <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
 
       <button class="upload-btn" (click)="goToUpload()">Ajouter des fichiers</button>
@@ -28,12 +28,12 @@
 
     </div>
 
-    <!-- CONTENT -->
+  
     <div class="content">
 
       <h2>Mes fichiers</h2>
 
-      <!-- FILTERS -->
+   
       <div class="filters">
         <button [class.active]="filter === 'all'" (click)="setFilter('all')">
           Tous
@@ -48,12 +48,12 @@
         </button>
       </div>
 
-      <!-- FILE LIST -->
+    
       <div class="file-list">
 
         <div *ngFor="let file of filteredFiles" class="file-item">
 
-          <!-- LEFT -->
+       
           <div class="file-info">
             <span class="icon">
               <i class="fa-regular fa-file-image"></i>
@@ -62,22 +62,22 @@
             <div (click)="goToDownload(file.downloadToken)">
               <strong>{{ file.fileName }}</strong>
 
-              <!-- ACTIVE -->
+              
               <p *ngIf="!isExpired(file.expiresAt)">
                 Expire {{ getRemainingDays(file.expiresAt) }}
               </p>
 
-              <!-- EXPIRED -->
+             
               <p class="expired" *ngIf="isExpired(file.expiresAt)">
                 Expiré
               </p>
             </div>
           </div>
 
-          <!-- RIGHT ACTIONS -->
+        
           <div class="actions">
 
-            <!-- VERSIONE DESKTOP -->
+          
             <div class="desktop-actions">
               <button class="delete" (click)="deleteFile(file.id)">
                 Supprimer
@@ -88,7 +88,7 @@
               </button>
             </div>
 
-            <!-- VERSIONE MOBILE  -->
+           
             <div class="mobile-actions">
               <button class="menu-dots" (click)="toggleMenu(file.id)">
                 ⋮
@@ -107,7 +107,7 @@
 
           </div>
 
-          <!-- TEMPLATE FUORI (IMPORTANTE) -->
+        
           <ng-template #expiredBlock>
             <p class="expired-message">
               Ce fichier a expiré, il n’est plus stocké chez nous
@@ -116,7 +116,7 @@
 
         </div>
 
-        <!-- EMPTY STATE -->
+     
         <div *ngIf="filteredFiles.length === 0" class="empty">
           Aucun fichier trouvé
         </div>
