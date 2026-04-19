@@ -20,12 +20,8 @@ export class RegisterComponent {
   constructor(private auth: AuthService, private router: Router) { }
 
   onSubmitRegister() {
-    if (this.registerData.password !== this.registerData.passwordConfirm) {
-      this.error = "Les mots de passe ne correspondent pas !";
-      return;
-    }
-
-    const payload = {
+     if (!this.validateForm()) return;
+       const payload = {
       email:this.registerData.email,
       password:this.registerData.password
     };
@@ -44,4 +40,26 @@ export class RegisterComponent {
   goToLogin() {
     this.router.navigate(['/login']);
   }
+  validateForm(): boolean {
+ if (!this.isValidEmail(this.registerData.email)) {
+    this.error = "Email invalide (ex: test@mail.com)";
+    return false;
+  }
+
+  if (this.registerData.password.length < 8) {
+    this.error = "Mot de passe minimum 8 caractères";
+    return false;
+  }
+
+  if (this.registerData.password !== this.registerData.passwordConfirm) {
+    this.error = "Les mots de passe ne correspondent pas";
+    return false;
+  }
+
+  return true;
+}
+isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 }
