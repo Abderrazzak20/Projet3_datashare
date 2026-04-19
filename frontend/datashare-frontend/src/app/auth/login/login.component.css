@@ -13,7 +13,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* Necessario per coprire tutta l'altezza */
 }
 
 .top-bar {

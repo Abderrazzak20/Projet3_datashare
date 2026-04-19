@@ -42,7 +42,6 @@ public class User implements UserDetails {
     private Long id; 
     @NotBlank
     @Column(unique = true)
-	@NotBlank
 	@Email(message = "email invalide")
     private String email;
 

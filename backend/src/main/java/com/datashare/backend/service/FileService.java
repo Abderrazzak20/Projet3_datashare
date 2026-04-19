@@ -32,7 +32,7 @@ public class FileService {
     	   String lowerCaseName=filename.toLowerCase();
     	   String[] forbiddenExtensions = { ".exe", ".bat", ".cmd", ".sh" };
     	   		for(String ext : forbiddenExtensions) {
-    	   			if(lowerCaseName.endsWith(ext)) {throw new IllegalArgumentException("Tipo di file non consentito: " + ext);
+    	   			if(lowerCaseName.endsWith(ext)) {throw new IllegalArgumentException("Type de fichier non autorisé: " + ext);
     	   			}
     	   		}
         if (!Files.exists(storageLocation)) {

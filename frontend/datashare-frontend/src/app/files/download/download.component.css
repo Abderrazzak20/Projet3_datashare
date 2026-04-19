@@ -94,8 +94,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 230, 230, 1); /* leggero rosso chiaro */
-  color: rgba(198, 40, 40, 1);        /* rosso intenso */
+  background: rgba(255, 230, 230, 1); 
+  color: rgba(198, 40, 40, 1);        
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 13px;
@@ -105,7 +105,7 @@
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  color: rgba(198, 40, 40, 1);  /* colore rosso dell’icona */
+  color: rgba(198, 40, 40, 1);  
 }
 
 label {

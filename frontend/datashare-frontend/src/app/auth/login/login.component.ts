@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   loginData: LoginRequest = { email: '', password: '' };
   error: string = '';
-  showLogin = false; // gestisce se mostrare la card login
+  showLogin = false; 
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -23,12 +23,10 @@ export class LoginComponent {
     this.showLogin = true;
   }
 
-  // Naviga alla pagina Register
   goToRegister() {
     this.router.navigate(['/register']);
   }
 
-  // Naviga alla pagina Upload (dalla home)
   goToUpload() {
     this.router.navigate(['/upload']);
   }
@@ -42,7 +40,7 @@ goToDasheboard(){
         this.router.navigate(['mon-espace']);
       },
       error: (err) => {
-        this.error = 'credenziali non valide';
+        this.error = 'Identifiants invalides';
         console.error(err);
         alert("Mauvaise credenziale");
       }

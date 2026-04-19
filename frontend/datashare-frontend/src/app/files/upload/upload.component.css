@@ -8,7 +8,7 @@
     position: relative;
 }
 
-/* Top bar */
+
 .top-bar {
     position: absolute;
     top: 20px;
@@ -44,7 +44,7 @@
     font-size: 12px;
 }
 
-/* Card */
+
 .card {
     background: rgba(255, 255, 255, 1);
     padding: 25px;
@@ -55,13 +55,13 @@
     margin-top: 70px;
 }
 
-/* Title */
+
 .card h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Inputs */
+
 label {
     font-size: 12px;
 }
@@ -82,7 +82,7 @@ input {
     text-align: left;
 }
 
-/* Buttons */
+
 .img_televerser {
     width: 100%;
     padding: 10px;
@@ -101,7 +101,7 @@ input {
     margin-bottom: 10px;
 }
 
-/* Error / Success */
+
 .error {
     color: red;
     text-align: center;
@@ -114,7 +114,7 @@ input {
     margin-top: 10px;
 }
 
-/* Upload form specifics */
+
 .upload-form {
     width: 430px;
     max-width: 90vw;

@@ -8,12 +8,12 @@
   <div class="card download-card">
     <h2>Télécharger un fichier</h2>
 
-    <!-- LOADING -->
+   
     <div *ngIf="!fileName && !error" class="loading">
       Chargement des informations...
     </div>
 
-    <!-- FILE INFO -->
+ 
     <ng-container *ngIf="fileName && !error && isExpired===false">
       <div class="file-row">
         <i class="fa-regular fa-file-image"></i>
@@ -30,7 +30,7 @@
       <label>Mot de passe</label>
       <input type="password"  name="password"
         placeholder="Saisissez votre mot de passe..." required>
-      <!-- DOWNLOAD BUTTON -->
+    
       <button class="download-btn" (click)="download()" [disabled]="!token">
         <i class="fa-solid fa-cloud-arrow-down"></i>
         Télécharger
@@ -48,12 +48,12 @@
       </div>
     </ng-container>
 
-    <!-- ERROR -->
+   
     <div *ngIf="error" class="error">
       {{ error }}
     </div>
 
-    <!-- SUCCESS -->
+   
     <div *ngIf="success" class="success">
       {{ success }}
     </div>

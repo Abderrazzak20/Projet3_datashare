@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
 export class MonEspaceComponent {
   
   error: string = '';
-  showLogin = false; // gestisce se mostrare la card login
+  showLogin = false; 
 
   constructor( private router: Router) { }
 
@@ -21,7 +20,7 @@ export class MonEspaceComponent {
    this.router.navigate(["/dashboard"]);
   }
 
-  // Naviga alla pagina Upload (dalla home)
+
   goToUpload() {
     this.router.navigate(['/upload']);
   }

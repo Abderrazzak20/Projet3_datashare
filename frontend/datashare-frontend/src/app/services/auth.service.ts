@@ -7,7 +7,7 @@ import { JwtResponse } from '../dto/JwtResponse';
   providedIn: 'root'
 })
 export class AuthService {
- private baseUrl = 'http://localhost:8080/api'; // backend Spring Boot
+ private baseUrl = 'http://localhost:8080/api'; 
   private tokenKey = 'token';
   constructor(private http: HttpClient) { }
    register(data: { email: string; password: string }): Observable<{ message: string }> {
