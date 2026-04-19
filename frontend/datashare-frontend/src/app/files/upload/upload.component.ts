@@ -43,23 +43,40 @@ export class UploadComponent {
 
  uploadFile() {
   if (!this.selectedFile) {
-    alert("Selectionner un fichier");
+    alert("Sélectionner un fichier");
     return;
   }
 
-  this.fileSize = this.formatSize(this.selectedFile.size);
+  const file = this.selectedFile;
 
-  this.fileService.upload(this.selectedFile, this.expiration).subscribe({
+  // ❌ TEST TAILLE
+  if (file.size > this.maxFileSize) {
+    alert("Fichier trop volumineux (max 1 Go)");
+    return;
+  }
+
+  const forbidden = ['.exe', '.bat', '.cmd', '.sh'];
+  const name = file.name.toLowerCase();
+
+  if (forbidden.some(ext => name.endsWith(ext))) {
+    alert("Type de fichier interdit");
+    return;
+  }
+
+
+  this.fileService.upload(file, this.expiration).subscribe({
     next: (res) => {
       this.uploadedFile = res;
-      console.log("guarda quaaa", res);
-      this.selectedFile = null;
-      this.fileError = "";
       alert("Upload réussi !");
     },
     error: (err) => {
-      console.error(err);
-      alert("Erreur lors de l'upload");
+      if (err.status === 400) {
+        alert("Fichier invalide");
+      } else if (err.status === 401) {
+        alert("Non authentifié");
+      } else {
+        alert("Erreur serveur");
+      }
     }
   });
 }

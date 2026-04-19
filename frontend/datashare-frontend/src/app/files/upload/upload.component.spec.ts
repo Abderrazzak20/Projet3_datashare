@@ -37,7 +37,7 @@ describe('UploadComponent', () => {
 
     component.uploadFile();
 
-    expect(window.alert).toHaveBeenCalledWith('Selectionner un fichier');
+    expect(window.alert).toHaveBeenCalledWith('Sélectionner un fichier');
     expect(fileServiceSpy.upload).not.toHaveBeenCalled();
   });
 
@@ -62,17 +62,15 @@ describe('UploadComponent', () => {
     const fakeFile = new File(['data'], 'test.txt');
 
     fileServiceSpy.upload.and.returnValue(
-      throwError(() => new Error('upload error'))
+  
+      throwError(() => ({ status: 500, message: 'upload error' }))
     );
 
     spyOn(window, 'alert');
-    spyOn(console, 'error');
-
     component.selectedFile = fakeFile;
 
     component.uploadFile();
 
-    expect(window.alert).toHaveBeenCalledWith("Erreur lors de l'upload");
-    expect(console.error).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith("Erreur serveur");
   });
 });
