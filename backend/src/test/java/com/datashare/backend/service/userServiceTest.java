@@ -55,7 +55,7 @@ class UserServiceTest {
         when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(new User()));
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.register(request));
-        assertEquals("User with login mario already exists", exception.getMessage());
+        assertEquals("User with login mario@gmail.com already exists", exception.getMessage());
     }
 
     @Test

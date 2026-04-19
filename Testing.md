@@ -1,135 +1,96 @@
-# Testing DataShare
+# 🧪 TESTING.md
 
-## 1. Objectif
-
-Ce document décrit la stratégie de test du prototype DataShare.
-
-L’objectif est de garantir :
-- le bon fonctionnement des API backend
-- la sécurité des accès
-- le bon fonctionnement de l’interface utilisateur 
-- la gestion correcte des fichiers
+## Objectif
+Ce document décrit la stratégie de tests mise en place afin de garantir la qualité, la fiabilité et la conformité de l’application DataShare.
 
 ---
 
-## 2. Type de tests
+## 1. Types de tests implémentés
 
-### 2.1 Tests manuels 
+### Tests unitaires
+Les tests unitaires vérifient le bon fonctionnement des composants critiques de l’application backend et frontend.
 
-Les tests sont réalisés via :
-- Postman (API backend)
-- Swagger UI
-- Navigateur pour le front end 
+Backend :
+- Génération de token JWT
+- Validation du format du token
+- Rejet des tokens expirés ou invalides
 
----
+Frontend (Angular) :
+- Affichage et filtrage des fichiers
+- Upload de fichiers
+- Téléchargement de fichiers
+- Navigation entre les pages
+- Gestion des erreurs utilisateur
 
-## 3. Tests Backend (API)
-
-### 3.1 Authentification
-
-- [ ] Inscription utilisateur (/api/register)
-- [ ] Connexion utilisateur (/api/login)
-- [ ] Génération du token JWT
-- [ ] Accès refusé sans token (401)
-- [ ] Accès refusé avec token invalide
-
----
-
-### 3.2 Gestion des fichiers
-
-- [ ] Upload de fichier (/api/files/upload)
-- [ ] Upload refusé sans authentification
-- [ ] Récupération des fichiers utilisateur (/api/files/my-files)
-- [ ] Suppression d’un fichier (/api/files/{id})
-- [ ] Vérification que l’utilisateur ne peut supprimer que ses fichiers
+Outils :
+- xUnit (backend)
+- Jasmine / Karma (frontend Angular)
 
 ---
 
-### 3.3 Téléchargement
+### Tests d’intégration
+Les tests d’intégration valident le comportement des contrôleurs avec des services mockés.
 
-- [ ] Téléchargement via token (/api/files/download/{token})
-- [ ] Refus si token invalide (404)
-- [ ] Refus si fichier expiré
+- Test des endpoints REST (upload, download, login)
+- Vérification des réponses HTTP (200, 400, 404)
+- Validation des entrées utilisateur
+- Simulation des services avec Mockito
 
----
-
-### 3.4 Validation des données
-
-- [ ] Email invalide rejeté
-- [ ] Mot de passe inférieur à 8 caractères rejeté
-- [ ] Données invalides → réponse 400
-
----
-
-### 3.5 Tests de sécurité
-
-- [ ] Accès aux endpoints protégés sans JWT → refus
-- [ ] Vérification des droits utilisateur
-- [ ] Protection des routes sensibles
+Outils :
+- @WebMvcTest
+- MockMvc
+- Mockito
 
 ---
 
-## 4. Tests Frontend (Angular)
+### Tests fonctionnels
+Les tests fonctionnels vérifient le respect des règles métier :
 
-### 4.1 Authentification
-
-- [ ] Inscription via formulaire
-- [ ] Connexion via formulaire
-- [ ] Stockage du JWT dans le localStorage
-- [ ] Redirection après login vers l’espace utilisateur
-
----
-
-### 4.2 Navigation et accès
-
-- [ ] Accès aux routes protégées avec AuthGuard
-- [ ] Refus d’accès sans connexion
-- [ ] Redirection vers login si non authentifié
+- Accès uniquement aux ressources appartenant à l’utilisateur
+- Gestion correcte des fichiers expirés
+- Validation des données utilisateur
+- Comportement des endpoints sécurisés
 
 ---
 
-### 4.3 Gestion des fichiers
+### Tests end-to-end (E2E)
 
-- [ ] Upload de fichier via interface
-- [ ] Affichage des fichiers utilisateur
-- [ ] Suppression de fichier via bouton dans le dashboard
-- [ ] Rafraîchissement de la liste après action
+Les tests end-to-end simulent le comportement réel d’un utilisateur sur l’ensemble du système.
 
----
+Scénarios testés :
 
-### 4.4 Téléchargement
+- Inscription → connexion → récupération du JWT
+- Upload de fichier avec authentification
+- Génération d’un lien de téléchargement
+- Téléchargement du fichier via token
+- Vérification du contenu téléchargé
+- Gestion des erreurs :
+  - login invalide (401)
+  - token de téléchargement invalide (404)
 
-- [ ] Téléchargement via lien public (/download/:token)
-- [ ] Affichage des informations du fichier
-- [ ] Gestion des erreurs (token invalide)
-
----
-
-## 5. Tests d’intégration (Frontend + Backend)
-
-- [ ] Login → récupération du JWT → appels API sécurisés
-- [ ] Upload → fichier visible dans l’historique
-- [ ] Suppression → fichier supprimé côté backend et frontend
-- [ ] Téléchargement → fichier récupéré correctement
+Ces tests utilisent MockMvc avec un contexte Spring Boot complet.
 
 ---
 
-## 6. Cas d’erreurs testés
+## 2. Objectif de couverture
+L’objectif est d’atteindre une couverture minimale de **70 %**, conformément aux exigences du référentiel.
 
-- utilisateur non authentifié
-- token invalide
-- fichier expiré
-- données invalides
-
----
-
-## 7. Limites des tests 
-
-- Tests principalement manuels
-- Pas de tests unitaires automatisés
-- Pas de tests frontend automatisés
+La priorité est donnée :
+- à la sécurité
+- aux règles métier
+- aux endpoints exposés
 
 ---
 
-## 8. Améliorations futures
-- Tests automatisés CI/CD
+## 3.1 Résultats de couverture (Frontend Angular)
+
+Statements : 74.59% (185/248)  
+Branches : 35.71% (15/42)  
+Functions : 79.72% (59/74)  
+Lines : 77.92% (173/222)  
+
+## 3.2 Résultats de couverture (Backend)
+
+backend global:    87,9 %  
+src/main/java:     78,5 %  
+src/test/java:     97,3 %  

@@ -1,5 +1,8 @@
 # Security- DataShare
 
+## Objectif
+Ce document décrit les mesures de sécurité mises en œuvre pour protéger les données et les accès à l’application DataShare.
+
 ## 1.Authentification
 
 L’application utilise Spring Security avec JWT.
@@ -24,8 +27,8 @@ Authorization: Bearer <token>
 ## 3. Password Security
 
 - Les mots de passe sont hachés avec "BCrypt"
-- Les mots de passe ne sont jamais stockés en clair
-- Les mots de passe ne sont jamais renvoyés via API
+- Les mots de passe ne sont pas stockés en clair
+- Les mots de passe ne sont pas renvoyés via API
 
 ---
 
@@ -35,21 +38,9 @@ Authorization: Bearer <token>
 - Chaque fichier possède un "token unique de téléchargement"
 - Les fichiers ne sont pas accessibles directement via URL
 - Les fichiers peuvent expirer après une durée définie
-- Les fichiers expirés sont automatiquement refusés
-
 ---
 
-## 5. Input Validation
-
-Toutes les entrées utilisateur sont validées avec `jakarta.validation` :
-
-- email valide obligatoire
-- mot de passe minimum 8 caractères
-- contrôle sur les fichiers uploadés
-
----
-
-## 6. API Security
+## 5. API Security
 
 - Les endpoints sensibles sont protégés par Spring Security
 - Le JWT est vérifié à chaque requête
@@ -60,12 +51,12 @@ Toutes les entrées utilisateur sont validées avec `jakarta.validation` :
 
 ---
 
-## 7. CORS Policy
+## 6. CORS Policy
 
 - CORS est configuré pour autoriser uniquement les origines autorisées
 - Empêche les appels non autorisés depuis des domaines externes
 
-## 8. Frontend Security
+## 7. Frontend Security
 
 - Le token JWT est stocké dans le localStorage
 - Les requêtes API incluent automatiquement le token via HttpHeaders

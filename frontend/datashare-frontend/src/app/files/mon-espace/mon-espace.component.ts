@@ -15,7 +15,7 @@ export class MonEspaceComponent {
   error: string = '';
   showLogin = false; // gestisce se mostrare la card login
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor( private router: Router) { }
 
   toDasheboeard() {
    this.router.navigate(["/dashboard"]);

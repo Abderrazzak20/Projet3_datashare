@@ -29,12 +29,12 @@ public class TestFileE2E {
 		String loginRequest = """
 				{
 				"email":"mario@gmail.com",
-				"password":"pass123"
+				"password":"password123"
 				}
 				""";
 		SignupRequest signup = new SignupRequest();
 		signup.setEmail("mario@gmail.com");
-		signup.setPassword("pass123");
+		signup.setPassword("password123");
 		mockMvc.perform(post("/api/register").contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(signup))).andExpect(status().isOk());
 
@@ -61,16 +61,16 @@ public class TestFileE2E {
 	void testLoginFail() throws Exception {
 		SignupRequest signup = new SignupRequest();
 		signup.setEmail("Test@gmail.com");
-		signup.setPassword("pass123");
+		signup.setPassword("password123");
 		mockMvc.perform(post("/api/register").contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(signup))).andExpect(status().isOk());
 
 		String badRequest = """
-				{
-				"login":"badLogin",
-				"password":"badPassword"
-				}
-				""";
+			    {
+			        "email": "badLogin@gmail.com",
+			        "password": "badPassword"
+			    }
+			    """;
 		mockMvc.perform(post("/api/login").contentType(MediaType.APPLICATION_JSON).content(badRequest))
 				.andExpect(status().isUnauthorized());
 	}

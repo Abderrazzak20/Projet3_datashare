@@ -39,7 +39,7 @@ class UserControllerTest {
     void testRegister() throws Exception {
         SignupRequest request = new SignupRequest();
         request.setEmail("mario@gmail.com");
-        request.setPassword("pass123");
+        request.setPassword("password123");
 
         doNothing().when(userService).register(any(SignupRequest.class));
 
@@ -54,7 +54,7 @@ class UserControllerTest {
     void testLogin() throws Exception {
         loginRequest request = new loginRequest();
         request.setEmail("mario@gmail.com");
-        request.setPassword("pass123");
+        request.setPassword("password123");
 
         when(userService.login(any(loginRequest.class))).thenReturn(new jwtResponse("token123"));
 

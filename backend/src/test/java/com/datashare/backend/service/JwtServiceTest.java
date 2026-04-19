@@ -54,7 +54,7 @@ public class JwtServiceTest {
 		
 		String token=jwtServ.generateTokenRegister(user);
 		String login = jwtServ.extractLogin(token);
-		assertEquals("Mario@gmail.com",login);
+		assertEquals("mario@gmail.com",login);
 	}
 	@Test
 	void testTokenValid() {
