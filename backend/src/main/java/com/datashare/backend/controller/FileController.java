@@ -39,20 +39,24 @@ public class FileController {
 		@ApiResponse(responseCode = "400", description = "Fichier invalide ou trop volumineux"),
 			@ApiResponse(responseCode = "401", description = "Non authentifié") })
 	@PostMapping("/upload")
-	public ResponseEntity<FileUploadResponse> uploadFile(@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "expireDays", defaultValue = "7") int expireDays, @AuthenticationPrincipal User user)
-			throws IOException {
-		if (expireDays < 1 || expireDays > 7) {
-			return ResponseEntity.badRequest().build();
-		}
-		try {
-			UserFile savedFile = fileService.storeFile(file, user, expireDays);
-			FileUploadResponse response = new FileUploadResponse(savedFile.getFileName(), savedFile.getDownloadToken(),
-					savedFile.getExpiresAt());
-			return ResponseEntity.ok(response);
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new FileUploadResponse("", "", null));
-		}
+	public ResponseEntity<FileUploadResponse> uploadFile(
+	        @RequestParam("file") MultipartFile file,
+	        @RequestParam(value = "expireDays", defaultValue = "7") int expireDays,
+	        @AuthenticationPrincipal User user) throws IOException {
+
+	    if (expireDays < 1 || expireDays > 7) {
+	        throw new IllegalArgumentException("Durée d'expiration invalide");
+	    }
+
+	    UserFile savedFile = fileService.storeFile(file, user, expireDays);
+
+	    FileUploadResponse response = new FileUploadResponse(
+	            savedFile.getFileName(),
+	            savedFile.getDownloadToken(),
+	            savedFile.getExpiresAt()
+	    );
+
+	    return ResponseEntity.ok(response);
 	}
 
 	@Operation(summary = "Télécharger un fichier via token", description = "Permet de télécharger un fichier avec un lien public (token)")
@@ -63,12 +67,7 @@ public class FileController {
 	public ResponseEntity<byte[]> downloadFile(@PathVariable String token) throws IOException {
 
 		UserFile userFile = fileService.getFileByToken(token);
-		if (userFile == null
-				|| (userFile.getExpiresAt() != null && userFile.getExpiresAt().isBefore(LocalDateTime.now()))) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-
-		Path path = Path.of(userFile.getFilePath());
+			Path path = Path.of(userFile.getFilePath());
 		byte[] data = Files.readAllBytes(path);
 
 		return ResponseEntity.ok()
@@ -93,15 +92,16 @@ public class FileController {
 		@ApiResponse(responseCode = "404", description = "Fichier introuvable") })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteFile(@PathVariable Long id, @AuthenticationPrincipal User user)
-			throws IOException {
-		UserFile file = fileService.getFileById(id);
+	        throws IOException {
 
-		if (file == null || file.getUser() == null || !file.getUser().getId().equals(user.getId())) {
-			return ResponseEntity.notFound().build();
-		}
+	    UserFile file = fileService.getFileById(id);
 
-		fileService.deleteFile(file);
-		return ResponseEntity.noContent().build();
+	    if (file.getUser() == null || !file.getUser().getId().equals(user.getId())) {
+	        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	    }
+
+	    fileService.deleteFile(file);
+	    return ResponseEntity.noContent().build();
 	}
 	@Operation(summary = "Informations d’un fichier via token", description = "Retourne les informations d’un fichier partagé via token"
 			)

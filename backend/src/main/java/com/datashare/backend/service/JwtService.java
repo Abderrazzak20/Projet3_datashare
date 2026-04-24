@@ -21,7 +21,7 @@ public class JwtService {
     @Value("${JWT_SECRET_KEY}")
     private String SECRET_KEY;
 
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 ora
+    private final long EXPIRATION = 1000 * 60 * 60; 
     private final UserRepository userRepository;
 
     public JwtService(UserRepository userRepository) {
@@ -34,7 +34,7 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         User user = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+                .orElseThrow(() -> new UsernameNotFoundException("utilisateur non trouve"));
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())

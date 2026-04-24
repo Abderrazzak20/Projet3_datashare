@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+.metadata/
 ### STS ###
 .apt_generated
 .classpath
@@ -12,10 +13,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
+backend/.gitignore
 ### dossier compilation###
 backend/bin/*
-### dossier pour les upload de fichier ###
-backend/uploads
+backend/uploads/*
 ### IntelliJ IDEA ###
 .idea
 *.iws

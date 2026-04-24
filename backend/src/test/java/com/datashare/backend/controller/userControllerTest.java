@@ -1,8 +1,8 @@
 package com.datashare.backend.controller;
 
 import com.datashare.backend.DTO.SignupRequest;
-import com.datashare.backend.DTO.loginRequest;
-import com.datashare.backend.DTO.jwtResponse;
+import com.datashare.backend.DTO.LoginRequest;
+import com.datashare.backend.DTO.JwtResponse;
 import com.datashare.backend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -52,11 +52,11 @@ class UserControllerTest {
 
     @Test
     void testLogin() throws Exception {
-        loginRequest request = new loginRequest();
+        LoginRequest request = new LoginRequest();
         request.setEmail("mario@gmail.com");
         request.setPassword("password123");
 
-        when(userService.login(any(loginRequest.class))).thenReturn(new jwtResponse("token123"));
+        when(userService.login(any(LoginRequest.class))).thenReturn(new JwtResponse("token123"));
 
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)
