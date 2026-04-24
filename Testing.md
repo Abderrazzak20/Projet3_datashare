@@ -23,7 +23,7 @@ Frontend (Angular) :
 - Gestion des erreurs utilisateur
 
 Outils :
-- xUnit (backend)
+- JUnit 5 (backend)
 - Jasmine / Karma (frontend Angular)
 
 ---
