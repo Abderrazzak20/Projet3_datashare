@@ -12,7 +12,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+### dossier compilation###
+backend/bin/*
+### dossier pour les upload de fichier ###
+backend/uploads
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -32,3 +35,4 @@ build/
 ### VS Code ###
 .vscode/
 .env
+/uploads

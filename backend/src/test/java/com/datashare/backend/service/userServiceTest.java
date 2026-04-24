@@ -1,7 +1,7 @@
 package com.datashare.backend.service;
 import com.datashare.backend.DTO.SignupRequest;
-import com.datashare.backend.DTO.loginRequest;
-import com.datashare.backend.DTO.jwtResponse;
+import com.datashare.backend.DTO.LoginRequest;
+import com.datashare.backend.DTO.JwtResponse;
 import com.datashare.backend.entities.User;
 import com.datashare.backend.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,7 +60,7 @@ class UserServiceTest {
 
     @Test
     void testLoginSuccess() {
-        loginRequest request = new loginRequest();
+        LoginRequest request = new LoginRequest();
         request.setEmail("mario@gmail.com");
         request.setPassword("pass123");
 
@@ -72,13 +72,13 @@ class UserServiceTest {
         when(passwordEncoder.matches("pass123", "encodedPass")).thenReturn(true);
         when(jwtService.generateTokenRegister(user)).thenReturn("token123");
 
-        jwtResponse response = userService.login(request);
+        JwtResponse response = userService.login(request);
         assertEquals("token123", response.getToken());
     }
 
     @Test
     void testLoginInvalidPassword() {
-        loginRequest request = new loginRequest();
+        LoginRequest request = new LoginRequest();
         request.setEmail("mario@gmail.com");
         request.setPassword("wrong");
 
@@ -95,7 +95,7 @@ class UserServiceTest {
 
     @Test
     void testLoginUserNotFound() {
-        loginRequest request = new loginRequest();
+        LoginRequest request = new LoginRequest();
         request.setEmail("mario@gmail.com");
         request.setPassword("pass123");
 

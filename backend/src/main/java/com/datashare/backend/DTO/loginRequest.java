@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class loginRequest {
+public class LoginRequest {
     @Schema(example = "user@gmail.com", description = "Email de l'utilisateur")
 	@NotBlank
 	@Email(message = "email invalide")

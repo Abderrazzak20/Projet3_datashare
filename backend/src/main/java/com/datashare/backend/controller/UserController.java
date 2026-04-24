@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.datashare.backend.DTO.SignupRequest;
-import com.datashare.backend.DTO.jwtResponse;
-import com.datashare.backend.DTO.loginRequest;
+import com.datashare.backend.DTO.JwtResponse;
+import com.datashare.backend.DTO.LoginRequest;
 import com.datashare.backend.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,8 +38,8 @@ public class UserController {
     @ApiResponse(responseCode = "200",description = "Connexion réussie et JWT généré")
     @ApiResponse(responseCode = "400",description = "L'identifiants est invalides")
     @PostMapping("/login")
-    public ResponseEntity<jwtResponse> login(@Valid @RequestBody loginRequest loginRequest) {
-        jwtResponse jwtToken = userService.login(loginRequest);
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+        JwtResponse jwtToken = userService.login(loginRequest);
         return ResponseEntity.ok(jwtToken);
     }
 }
