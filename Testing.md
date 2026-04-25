@@ -84,10 +84,10 @@ La priorité est donnée :
 
 ## 3.1 Résultats de couverture (Frontend Angular)
 
-Statements : 74.59% (185/248)  
-Branches : 35.71% (15/42)  
-Functions : 79.72% (59/74)  
-Lines : 77.92% (173/222)  
+Statements   : 86.56% ( 232/268 )
+Branches     : 74.5% ( 38/51 )
+Functions    : 88.31% ( 68/77 )
+Lines        : 87.5% ( 210/240 )
 
 ## 3.2 Résultats de couverture (Backend)
 
