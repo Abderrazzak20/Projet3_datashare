@@ -1,3 +1,4 @@
+
 # Security- DataShare
 
 ## Objectif
@@ -26,7 +27,7 @@ Authorization: Bearer <token>
 
 ## 3. Password Security
 
-- Les mots de passe sont hachés avec "BCrypt"
+- Les mots de passe sont hachés avec BCrypt
 - Les mots de passe ne sont pas stockés en clair
 - Les mots de passe ne sont pas renvoyés via API
 
@@ -58,6 +59,17 @@ Authorization: Bearer <token>
 
 ## 7. Frontend Security
 
-- Le token JWT est stocké dans le localStorage
+- Le token JWT est stocké dans le localStorage du navigateur
 - Les requêtes API incluent automatiquement le token via HttpHeaders
 - Les routes sensibles sont protégées par un AuthGuard
+
+### Risque de sécurité (XSS)
+
+Le stockage du JWT dans le localStorage expose l'application à des attaques XSS (Cross-Site Scripting).  
+Un script malveillant injecté dans la page pourrait accéder au token et compromettre la session utilisateur.
+
+### Amélioration future
+
+- Migration vers des cookies HttpOnly
+- Activation des flags Secure et SameSite
+- Mise en place d’une protection CSRF
