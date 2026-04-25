@@ -103,6 +103,7 @@ public class FileController {
 	    fileService.deleteFile(file);
 	    return ResponseEntity.noContent().build();
 	}
+	
 	@Operation(summary = "Informations d’un fichier via token", description = "Retourne les informations d’un fichier partagé via token"
 			)
 			@ApiResponses({
