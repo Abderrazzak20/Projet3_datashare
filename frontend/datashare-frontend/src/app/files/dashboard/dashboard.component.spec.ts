@@ -72,5 +72,38 @@ it('should user logout', () => {
   expect(routeSpy.navigate).toHaveBeenCalledWith(["/login"]);
 });
 
+it('should show alert and still navigate when token is undefined', () => {
+  spyOn(window, 'alert');
 
+  component.goToDownload(undefined as any);
+
+  expect(window.alert).toHaveBeenCalledWith("lien de telechargement non disponible");
+  expect(routeSpy.navigate).toHaveBeenCalledWith(['/download', undefined]);
+});
+it('should show all files when filter is all', () => {
+  component.filter = 'all';
+  component.applyFilter();
+
+  expect(component.filteredFiles.length).toBe(component.files.length);
+});
+it('should detect expired file', () => {
+  const past = new Date(Date.now() - 86400000).toISOString();
+  expect(component.isExpired(past)).toBeTrue();
+});
+
+it('should detect active file', () => {
+  const future = new Date(Date.now() + 86400000).toISOString();
+  expect(component.isExpired(future)).toBeFalse();
+});
+it('should return today message', () => {
+  const date = new Date().toISOString();
+  expect(component.getRemainingDays(date)).toContain('aujourd’hui');
+});
+it('should toggle menu id', () => {
+  component.toggleMenu(1);
+  expect(component.openMenuId).toBe(1);
+
+  component.toggleMenu(1);
+  expect(component.openMenuId).toBeNull();
+});
 });
