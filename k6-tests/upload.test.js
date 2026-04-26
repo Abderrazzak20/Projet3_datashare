@@ -1,25 +1,54 @@
 import http from 'k6/http';
-import { check } from 'k6';
+import { check, sleep } from 'k6';
 
+// 🔧 Configuration du test
 export const options = {
   vus: 50,
   duration: '30s',
 };
 
-export default function () {
+const BASE_URL = 'http://localhost:8080';
 
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpb0BnbWFpbC5jb20iLCJpZCI6MiwiaWF0IjoxNzc2MTE2MDQwLCJleHAiOjE3NzYxMTk2NDB9.fyxB-O4c4N1ZT8qBWAenDEcxrXIsBiumM1QYTro4Sl0';
+/**
+ * 🔐 SETUP (executé une seule fois)
+ * → login et récupération du JWT
+ */
+export function setup() {
+  const loginRes = http.post(
+    `${BASE_URL}/api/login`,
+    JSON.stringify({
+      email: __ENV.USER_EMAIL,
+      password: __ENV.USER_PASSWORD,
+    }),
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
 
-  const url = 'http://localhost:8080/api/files/upload';
+  check(loginRes, {
+    'login réussi': (r) => r.status === 200,
+  });
+
+  const token = JSON.parse(loginRes.body).token;
+
+  return { token };
+}
+
+/**
+ * 🚀 TEST PRINCIPAL → UPLOAD sous charge
+ */
+export default function (data) {
+
+  const url = `${BASE_URL}/api/files/upload`;
 
   const formData = {
     file: http.file('hello world from k6', 'test.txt'),
-    expireDays: '7',
+    expiration: '7', 
   };
 
   const params = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${data.token}`,
     },
   };
 
@@ -28,4 +57,7 @@ export default function () {
   check(res, {
     'upload OK': (r) => r.status === 200,
   });
+
+  // 🧠 Simule un utilisateur réel
+  sleep(1);
 }
