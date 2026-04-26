@@ -1,12 +1,8 @@
 # 📦 DataShare
 
-## 📖 Description
+DataShare est une application web permettant de téléverser et de partager des fichiers via des liens de téléchargement temporaires.
 
-DataShare est une application web permettant de téléverser et partager des fichiers via des liens de téléchargement temporaires.
-
----
-
-## 🔢 Versions utilisées
+## 🔢 Technologies utilisées
 
 ### Frontend
 - Angular 19.2.0
@@ -23,25 +19,28 @@ DataShare est une application web permettant de téléverser et partager des fic
 - JWT 0.11.5
 - Springdoc OpenAPI 2.8.6
 
-### Database
-- PostgreSQL (utilisé avec pgAdmin)
+### Base de données
+- PostgreSQL (géré avec pgAdmin)
+
+---
 
 ## 🛠️ Installation
 
-### 1. Cloner le repository
-
+### 1. Cloner le dépôt
 ```bash
 git clone https://github.com/Abderrazzak20/Projet3_datashare.git
 cd datashare
 ```
 
----
-
-### 2. Configuration
-
-Créer un fichier `.env` et définir les variables suivantes :
-
+### 2. Configuration de la base de données
+Assurez-vous que PostgreSQL est en cours d'exécution, puis initialisez la base de données :
 ```bash
+psql -U postgres -f database/init.sql
+```
+
+### 3. Variables d'environnement
+Créez un fichier `.env` à la racine du projet avec les configurations suivantes :
+```env
 JWT_SECRET_KEY=your_secret_key
 JWT_EXPIRATION=3600000
 
@@ -52,45 +51,30 @@ DB_PASSWORD=mot_de_passe
 
 ---
 
-## ▶️ Lancement de l’application
+## ▶️ Lancement de l'application
 
-### 🔧 Backend (Spring Boot)
-
+### Backend (Spring Boot)
 ```bash
 mvn spring-boot:run
 ```
+*Backend disponible sur : http://localhost:8080*
 
-Backend disponible sur :  
-http://localhost:8080
-
----
-
-### 💻 Frontend (Angular)
-
+### Frontend (Angular)
 ```bash
 cd frontend
 npm install
 npm start
 ```
+*Frontend disponible sur : http://localhost:4200*
 
-Frontend disponible sur :  
-http://localhost:4200
-## 🚀 Script de déploiement
+---
 
-Un script bash est disponible pour lancer rapidement l’application (backend + frontend).
+## 🚀 Automatisation (Script de déploiement)
 
-### ▶️ Exécution
-
+Un script Bash est disponible pour lancer rapidement l'intégralité de l'application :
 ```bash
 chmod +x deploy.sh
 ./deploy.sh
+```
 
-Description
-
-Ce script :
-
-démarre le backend Spring Boot
-installe les dépendances du frontend
-lance l’application Angular
-
-⚠️ Assurez-vous que PostgreSQL est démarré avant l’exécution.
+**Note :** Assurez-vous que PostgreSQL est démarré avant l'exécution du script.
