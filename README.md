@@ -13,11 +13,12 @@ DataShare est une application web permettant de téléverser et de partager des 
 
 ### Backend
 - Java 17
-- Spring Boot 3.5.0
+- Spring Boot 3.5.14
 - Spring Security
 - Spring Data JPA
 - JWT 0.11.5
 - Springdoc OpenAPI 2.8.6
+- H2 (test uniquement)
 
 ### Base de données
 - PostgreSQL (géré avec pgAdmin)
