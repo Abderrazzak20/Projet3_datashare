@@ -78,3 +78,27 @@ Les dépendances Maven doivent être mises à jour régulièrement :
 - Maintenir une couverture de tests minimale de 70%
 - Effectuer des sauvegardes régulières de la base de données
 - Surveiller les logs applicatifs (Spring Boot / serveur)
+
+## 7. Gestion des données utilisateurs (RGPD)
+
+### 🔐 Données traitées
+L’application DataShare traite les données suivantes :
+- Email utilisateur
+- Mot de passe (hashé)
+- Fichiers uploadés
+- Métadonnées des fichiers (nom, taille, date d’expiration)
+
+### ⏳ Conservation des données
+- Les fichiers sont conservés entre 1 et 7 jours selon la configuration utilisateur
+- Les données associées sont supprimées automatiquement à expiration
+- Les fichiers supprimés manuellement sont immédiatement effacés
+
+### 🧑 Droits des utilisateurs
+Conformément au RGPD, l’utilisateur peut :
+- Supprimer ses fichiers à tout moment
+- Accéder à ses données via l’historique
+
+### 🔒 Sécurité des données
+- Mots de passe stockés sous forme hashée
+- Accès aux fichiers protégé par token unique
+- Suppression automatique des données expirées
