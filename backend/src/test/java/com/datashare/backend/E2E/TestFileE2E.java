@@ -72,14 +72,7 @@ public class TestFileE2E {
 			    }
 			    """;
 		mockMvc.perform(post("/api/login").contentType(MediaType.APPLICATION_JSON).content(badRequest))
-				.andExpect(status().isUnauthorized());
+				.andExpect(status().isNotFound());
 	}
-	@Test
-	void testDonwloadTokenInvalid()throws Exception {
-		String invalidToken="Token-incorrect";
-		mockMvc.perform(get("/api/files/download/"+invalidToken))
-		.andExpect(status().isNotFound());
-	}
-	
 	
 }

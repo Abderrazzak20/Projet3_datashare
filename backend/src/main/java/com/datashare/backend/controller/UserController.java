@@ -42,4 +42,5 @@ public class UserController {
         JwtResponse jwtToken = userService.login(loginRequest);
         return ResponseEntity.ok(jwtToken);
     }
+   
 }
