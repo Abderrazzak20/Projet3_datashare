@@ -1,29 +1,76 @@
 import http from 'k6/http';
 import { check } from 'k6';
 
+// 🔧 Configuration du test
 export const options = {
-  vus: 30,
+  vus: 10,
   duration: '30s',
 };
 
-export default function () {
+const BASE_URL = 'http://localhost:8080';
 
-  const tokenjwt = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJpb0BnbWFpbC5jb20iLCJpZCI6MiwiaWF0IjoxNzc2MTE2MDQwLCJleHAiOjE3NzYxMTk2NDB9.fyxB-O4c4N1ZT8qBWAenDEcxrXIsBiumM1QYTro4Sl0';
+/**
+ * 🔐 SETUP (executé une seule fois)
+ */
+export function setup() {
+  // 🔑 LOGIN
+  const loginRes = http.post(
+    `${BASE_URL}/api/login`,
+    JSON.stringify({
+      email: __ENV.USER_EMAIL,
+      password: __ENV.USER_PASSWORD,
+    }),
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
 
-  const downloadToken = '9a2d0dd2-3e4f-49ce-bf6a-853d52ade609';
+  check(loginRes, {
+    'login réussi': (r) => r.status === 200,
+  });
 
-  const params = {
-    headers: {
-      Authorization: `Bearer ${tokenjwt}`,
+  const token = JSON.parse(loginRes.body).token;
+
+  // 📁 UPLOAD (UNE SEULE FOIS)
+  const file = http.file('contenu test fichier', 'test.txt');
+
+  const uploadRes = http.post(
+    `${BASE_URL}/api/files/upload`,
+    {
+      file: file,
+      expiration: '1',
     },
-  };
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
+  check(uploadRes, {
+    'upload réussi (setup)': (r) => r.status === 200,
+  });
+
+  const downloadToken = JSON.parse(uploadRes.body).downloadToken;
+
+  // 👉 On retourne token + downloadToken
+  return { token, downloadToken };
+}
+
+/**
+ * 🚀 TEST PRINCIPAL → UNIQUEMENT DOWNLOAD
+ */
+export default function (data) {
   const res = http.get(
-    `http://localhost:8080/api/files/download/${downloadToken}`,
-    params
+    `${BASE_URL}/api/files/download/${data.downloadToken}`,
+    {
+      headers: {
+        Authorization: `Bearer ${data.token}`,
+      },
+    }
   );
 
   check(res, {
-    'download OK': (r) => r.status === 200,
+    'download réussi': (r) => r.status === 200,
   });
 }

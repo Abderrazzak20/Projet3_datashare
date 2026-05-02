@@ -25,6 +25,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 
+import com.datashare.backend.Handler.BadRequestException;
+import com.datashare.backend.Handler.NotFoundException;
 import com.datashare.backend.entities.User;
 import com.datashare.backend.entities.UserFile;
 import com.datashare.backend.repository.UserFileRepository;
@@ -64,7 +66,7 @@ public class FileServiceTest {
 				return 1024L * 1024L * 1024L + 1;
 			}
 		};
-		Exception ex = assertThrows(IllegalArgumentException.class, () -> fileService.storeFile(file, user, 3));
+		Exception ex = assertThrows(BadRequestException.class, () -> fileService.storeFile(file, user, 3));
 		assertEquals("File trop grande. Max 1GB.", ex.getMessage());
 
 	}
@@ -72,7 +74,7 @@ public class FileServiceTest {
 	@Test
 	void TestForbiddenExtension() {
 		MockMultipartFile file = new MockMultipartFile("file", "test.exe", "text/plan", "bad".getBytes());
-		Exception ex = assertThrows(IllegalArgumentException.class, () -> fileService.storeFile(file, user, 3));
+		Exception ex = assertThrows(BadRequestException.class, () -> fileService.storeFile(file, user, 3));
 		assertTrue(ex.getMessage().contains(".exe"));
 
 	};
@@ -93,31 +95,44 @@ public class FileServiceTest {
 		assertNotNull(result);
 	}
 
+	
 	@Test
 	void TestTokenNotFound() {
-		when(fileRepository.findByDownloadToken("bad")).thenReturn(Optional.empty());
-		UserFile result = fileService.getFileByToken("bad");
-		assertNull(result);
+	    when(fileRepository.findByDownloadToken("bad"))
+	            .thenReturn(Optional.empty());
+
+	    Exception ex = assertThrows(NotFoundException.class,
+	            () -> fileService.getFileByToken("bad"));
+
+	    assertEquals("Fichier introuvable", ex.getMessage());
 	}
+
 	@Test
-	void TestDeleteFile()throws IOException {
-		UserFile file = new UserFile();
-		Path pathFile=Files.createTempFile("test", ".txt");
-		file.setFilePath(pathFile.toString());
-		fileService.deleteFile(file);
-		assertFalse(Files.exists(pathFile));
-		verify(fileRepository).delete(file);
+	void TestDeleteFile() throws IOException {
+	    User user = new User();
+	    user.setEmail("test@gmail.com");
+	    UserFile file = new UserFile();
+	    file.setUser(user); 
+	    Path pathFile = Files.createTempFile("test", ".txt");
+	    file.setFilePath(pathFile.toString());
+	    fileService.deleteFile(file);
+	    assertFalse(Files.exists(pathFile));
+	    verify(fileRepository).delete(file);
 	}
+	
 	@Test 
-	void testDeleteExpiredFiles()throws IOException {
-		UserFile file= new UserFile();
-		Path pathFile=Files.createTempFile("expired", ".txt");
-		
-		file.setFilePath(pathFile.toString());
-		file.setExpiresAt(LocalDateTime.now().minusDays(1));
-		when(fileRepository.findAllByExpiresAtBefore(any())).thenReturn(List.of(file));
-		fileService.deleteExpiredFiles();
-		assertFalse(Files.exists(pathFile));
-		verify(fileRepository).delete(file);
+	void testDeleteExpiredFiles() throws IOException {
+	    User user = new User();
+	    user.setEmail("test@gmail.com");
+	    UserFile file = new UserFile();
+	    file.setUser(user); 
+	    Path pathFile = Files.createTempFile("expired", ".txt");
+	    file.setFilePath(pathFile.toString());
+	    file.setExpiresAt(LocalDateTime.now().minusDays(1));
+	    when(fileRepository.findAllByExpiresAtBefore(any()))
+	            .thenReturn(List.of(file));
+	    fileService.deleteExpiredFiles();
+	    assertFalse(Files.exists(pathFile));
+	    verify(fileRepository).delete(file);
 	}
 }

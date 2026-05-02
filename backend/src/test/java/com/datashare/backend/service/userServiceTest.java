@@ -1,5 +1,8 @@
 package com.datashare.backend.service;
 import com.datashare.backend.DTO.SignupRequest;
+import com.datashare.backend.Handler.BadRequestException;
+import com.datashare.backend.Handler.NotFoundException;
+import com.datashare.backend.Handler.UnauthorizedException;
 import com.datashare.backend.DTO.LoginRequest;
 import com.datashare.backend.DTO.JwtResponse;
 import com.datashare.backend.entities.User;
@@ -54,8 +57,8 @@ class UserServiceTest {
 
         when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(new User()));
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.register(request));
-        assertEquals("User with login mario@gmail.com already exists", exception.getMessage());
+        Exception exception = assertThrows(BadRequestException.class, () -> userService.register(request));
+        assertEquals("User already exists", exception.getMessage());
     }
 
     @Test
@@ -89,7 +92,7 @@ class UserServiceTest {
         when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("wrong", "encodedPass")).thenReturn(false);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.login(request));
+        Exception exception = assertThrows(UnauthorizedException.class, () -> userService.login(request));
         assertEquals("Invalid credentials", exception.getMessage());
     }
 
@@ -101,7 +104,7 @@ class UserServiceTest {
 
         when(userRepository.findByEmail("mario@gmail.com")).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.login(request));
-        assertEquals("Invalid credentials", exception.getMessage());
+        Exception exception = assertThrows(NotFoundException.class, () -> userService.login(request));
+        assertEquals("User not found", exception.getMessage());
     }
 }

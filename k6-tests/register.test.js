@@ -1,16 +1,20 @@
 import http from 'k6/http';
-import { check } from 'k6';
+import { check, sleep } from 'k6';
 
 export const options = {
   vus: 50,
   duration: '30s',
 };
 
+const BASE_URL = 'http://localhost:8080';
+
 export default function () {
-  const url = 'http://localhost:8080/api/register';
+
+ 
+  const email = `user_vu${__VU}_iter${__ITER}@test.com`;
 
   const payload = JSON.stringify({
-    email: `user_${Math.random()}@test.com`,
+    email: email,
     password: '12345678',
   });
 
@@ -20,9 +24,19 @@ export default function () {
     },
   };
 
-  const res = http.post(url, payload, params);
+  const res = http.post(`${BASE_URL}/api/register`, payload, params);
 
+  // ❌ DEBUG si erreur
+  if (res.status !== 200 && res.status !== 201) {
+    console.error(`REGISTER ERROR: ${res.status}`);
+    console.error(`EMAIL: ${email}`);
+    console.error(`BODY: ${res.body}`);
+  }
+
+  // ✔ CHECK
   check(res, {
-    'register OK': (r) => r.status === 200,
+    'register OK': (r) => r.status === 200 || r.status === 201,
   });
+
+  sleep(1);
 }

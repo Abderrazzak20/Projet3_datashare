@@ -46,15 +46,17 @@ describe('DownloadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should load file info success', () => {
     FileServiceSpy.getFileToken.and.returnValue(of({
       fileName: "test.txt", fileSize: 1024, expiresAt: new Date(Date.now() + 86400000).toISOString()
     } as any))
-    // component.loadFileInfo();
+     component.loadFileInfo();
     expect(component.fileName).toBe("test.txt")
     expect(component.error).toBe("");
     expect(component.isExpired).toBeFalse();
   });
+
   it('should handlle load file error', () => {
     FileServiceSpy.getFileToken.and.returnValue(throwError(() => new Error("error")));
     component.loadFileInfo();
@@ -83,4 +85,47 @@ describe('DownloadComponent', () => {
     expect(component.error).toBe('Erreur lors du téléchargement du fichier');
   });
 
+  it('should mark file as expired', () => {
+  FileServiceSpy.getFileToken.and.returnValue(of({
+    fileName: "test.txt",
+    fileSize: 1024,
+    expiresAt: new Date(Date.now() - 86400000).toISOString() // passato
+  } as any));
+
+  component.loadFileInfo();
+
+  expect(component.isExpired).toBeTrue();
+});
+it('should fail download if token is missing', () => {
+  component.token = '';
+
+  component.download();
+
+  expect(component.error).toBe("Le token est requis");
+  expect(FileServiceSpy.downloadFile).not.toHaveBeenCalled();
+});
+it('should return unknown size', () => {
+  expect(component.formatSize(undefined)).toBe('Taille inconnue');
+});
+
+it('should return 0 Mo for invalid size', () => {
+  expect(component.formatSize(-10 as any)).toBe('0 Mo');
+});
+
+it('should format MB size', () => {
+  expect(component.formatSize(5 * 1024 * 1024)).toContain('Mo');
+});
+
+it('should format KB size', () => {
+  expect(component.formatSize(5000)).toContain('Ko');
+});
+it('should return today', () => {
+  const today = new Date().toISOString();
+  expect(component.getRemainingDays(today)).toBe('aujourd’hui');
+});
+
+it('should return tomorrow', () => {
+  const tomorrow = new Date(Date.now() + 86400000).toISOString();
+  expect(component.getRemainingDays(tomorrow)).toBe('demain');
+});
 });

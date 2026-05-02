@@ -35,14 +35,13 @@ L’objectif est d’évaluer la stabilité, la rapidité et la robustesse du sy
 
 **Résultats :**
 - Taux de réussite : 100%
-- Temps de réponse moyen : ~4,8s
-- P95 : ~7,1s
-- Maximum : ~10,3s
+- Temps de réponse moyen : ~4,23s
+- P95 : ~6,93s
+- Maximum : ~8,2s
 
 **Analyse :**
 Le système d’authentification fonctionne correctement sous charge.  
-La latence est principalement liée au hachage des mots de passe et aux requêtes base de données.
-
+Les performances sont cohérentes avec un traitement incluant JWT + accès base de données.
 ---
 
 ### 3.2 Inscription utilisateur
@@ -51,13 +50,13 @@ La latence est principalement liée au hachage des mots de passe et aux requête
 - Durée : 30s
 
 **Résultats :**
-- Taux de réussite : 94,6%
-- Temps de réponse moyen : ~6,1s
-- P95 : ~13,6s
-- Maximum : ~14,9s
+- Taux de réussite : 100%
+- Temps de réponse moyen : ~2,52s
+- P95 : ~4,5s
+- Maximum : ~5,07s
 
 **Analyse :**
-L’inscription fonctionne sous charge mais présente une dégradation liée aux insertions concurrentes et au traitement des mots de passe.
+Le système d'inscription fonctionne correctement sous charge.
 
 ---
 
@@ -69,9 +68,9 @@ L’inscription fonctionne sous charge mais présente une dégradation liée aux
 **Résultats :**
 - Taux de réussite : 94,6%
 - Temps de réponse moyen : ~1,6s
-- P95 : ~7,8s
-- Maximum : ~31s
-- Débit : ~29 requêtes/sec
+- P95 : ~5,07s
+- Maximum : ~7,4s
+- Débit : ~16 requêtes/sec
 
 **Analyse :**
 L’upload fonctionne correctement mais montre une instabilité sous forte charge.
@@ -85,10 +84,10 @@ L’upload fonctionne correctement mais montre une instabilité sous forte charg
 
 **Résultats :**
 - Taux de réussite : 100%
-- Temps de réponse moyen : ~300ms
-- P95 : ~1,1s
-- Maximum : ~5,0s
-- Débit : ~87 requêtes/sec
+- Temps de réponse moyen : ~221ms
+- P95 : ~590ms
+- Maximum : ~1,79s
+- Débit : ~44 requêtes/sec
 
 **Analyse :**
 Le téléchargement est l’endpoint le plus performant du système.

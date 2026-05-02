@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.datashare.backend.Handler.NotFoundException;
 import com.datashare.backend.entities.User;
 import com.datashare.backend.entities.UserFile;
 import com.datashare.backend.service.FileService;
@@ -44,7 +45,6 @@ public class fileControllerTest {
 		mockMvc.perform(multipart("/api/files/upload").file(file).param("expireDays", "3")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.fileName").value("test.txt"))
 				.andExpect(jsonPath("$.downloadToken").value("token123"));
-
 	}
 
 	@Test
@@ -52,13 +52,12 @@ public class fileControllerTest {
 		MockMultipartFile file = new MockMultipartFile("file", "test.ext", "text/plain", "contenu".getBytes());
 		mockMvc.perform(multipart("/api/files/upload").file(file).param("expireDays", "10"))
 				.andExpect(status().isBadRequest());
-
 	}
 
 	@Test
 	void testDownloadNotFound() throws Exception {
-		when(fileService.getFileByToken("incorrect")).thenReturn(null);
-		mockMvc.perform(get("/api/files/download/bad")).andExpect(status().isNotFound());
+		when(fileService.getFileByToken("incorrect")).thenThrow(new NotFoundException("Fichier introuvable"));
+		mockMvc.perform(get("/api/files/download/incorrect")).andExpect(status().isNotFound());
 
 	}
 

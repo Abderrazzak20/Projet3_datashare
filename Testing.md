@@ -49,8 +49,6 @@ Les tests fonctionnels vérifient le respect des règles métier :
 - Accès uniquement aux ressources appartenant à l’utilisateur
 - Gestion correcte des fichiers expirés
 - Validation des données utilisateur
-- Comportement des endpoints sécurisés
-
 ---
 
 ### Tests end-to-end (E2E)
@@ -65,8 +63,7 @@ Scénarios testés :
 - Téléchargement du fichier via token
 - Vérification du contenu téléchargé
 - Gestion des erreurs :
-  - login invalide (401)
-  - token de téléchargement invalide (404)
+  - login invalide
 
 Ces tests utilisent MockMvc avec un contexte Spring Boot complet.
 
@@ -84,10 +81,10 @@ La priorité est donnée :
 
 ## 3.1 Résultats de couverture (Frontend Angular)
 
-Statements : 74.59% (185/248)  
-Branches : 35.71% (15/42)  
-Functions : 79.72% (59/74)  
-Lines : 77.92% (173/222)  
+Statements   : 86.56% ( 232/268 )
+Branches     : 74.5% ( 38/51 )
+Functions    : 88.31% ( 68/77 )
+Lines        : 87.5% ( 210/240 )
 
 ## 3.2 Résultats de couverture (Backend)
 

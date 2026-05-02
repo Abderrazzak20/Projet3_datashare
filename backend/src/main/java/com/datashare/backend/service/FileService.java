@@ -9,6 +9,8 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.datashare.backend.Handler.BadRequestException;
+import com.datashare.backend.Handler.NotFoundException;
 import com.datashare.backend.entities.User;
 import com.datashare.backend.entities.UserFile;
 import com.datashare.backend.repository.UserFileRepository;
@@ -33,14 +35,14 @@ public class FileService {
 
 		if (file.getSize() > maxSize) {
 			log.warn("Upload refusé (taille > 1GB) pour user: {}", user.getEmail());
-			throw new IllegalArgumentException("File trop grande. Max 1GB.");
+			throw new BadRequestException("File trop grande. Max 1GB.");
 		}
 
 		String filename = file.getOriginalFilename();
 
 		if (filename == null || filename.isBlank()) {
 			log.warn("Upload refusé - nom de fichier invalide pour user: {}", user.getEmail());
-			throw new IllegalArgumentException("Nom de fichier invalide");
+			throw new BadRequestException("Nom de fichier invalide");
 		}
 
 		String lowerCaseName = filename.toLowerCase();
@@ -50,7 +52,7 @@ public class FileService {
 		for (String ext : forbiddenExtensions) {
 			if (lowerCaseName.endsWith(ext)) {
 				log.warn("Upload refusé - extension interdite {} pour user: {}", ext, user.getEmail());
-				throw new IllegalArgumentException("Type de fichier non autorisé: " + ext);
+				throw new BadRequestException("Type de fichier non autorisé: " + ext);
 			}
 		}
 
@@ -85,7 +87,7 @@ public class FileService {
 	}
 
 	public UserFile getFileById(Long id) {
-		return fileRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Fichier introuvable"));
+		return fileRepository.findById(id).orElseThrow(() -> new NotFoundException("Fichier introuvable"));
 	}
 
 	public void deleteFile(UserFile file) throws IOException {
@@ -106,12 +108,12 @@ public class FileService {
 		log.info("Accès fichier via token");
 		UserFile file = fileRepository.findByDownloadToken(token).orElseThrow(() -> {
 			log.warn("Token invalide ou fichier introuvable");
-			return new IllegalArgumentException("Fichier introuvable");
+			return new NotFoundException("Fichier introuvable");
 		});
 
 		if (file.getExpiresAt() != null && file.getExpiresAt().isBefore(LocalDateTime.now())) {
 			log.warn("Accès refusé - fichier expiré id: {}", file.getId());
-			throw new IllegalArgumentException("Fichier expiré");
+			throw new BadRequestException("Fichier expiré");
 		}
 		log.info("Fichier accédé via token id: {}", file.getId());
 		return file;

@@ -3,11 +3,9 @@ package com.datashare.backend.controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.datashare.backend.DTO.FileUploadResponse;
+import com.datashare.backend.Handler.BadRequestException;
+import com.datashare.backend.Handler.UnauthorizedException;
 import com.datashare.backend.entities.User;
 import com.datashare.backend.entities.UserFile;
 import com.datashare.backend.service.FileService;
@@ -45,7 +45,7 @@ public class FileController {
 	        @AuthenticationPrincipal User user) throws IOException {
 
 	    if (expireDays < 1 || expireDays > 7) {
-	        throw new IllegalArgumentException("Durée d'expiration invalide");
+	        throw new BadRequestException("Durée d'expiration invalide");
 	    }
 
 	    UserFile savedFile = fileService.storeFile(file, user, expireDays);
@@ -95,14 +95,14 @@ public class FileController {
 	        throws IOException {
 
 	    UserFile file = fileService.getFileById(id);
-
 	    if (file.getUser() == null || !file.getUser().getId().equals(user.getId())) {
-	        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	        throw new UnauthorizedException("Access denied");
 	    }
 
 	    fileService.deleteFile(file);
 	    return ResponseEntity.noContent().build();
 	}
+	
 	@Operation(summary = "Informations d’un fichier via token", description = "Retourne les informations d’un fichier partagé via token"
 			)
 			@ApiResponses({
