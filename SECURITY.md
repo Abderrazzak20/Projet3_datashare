@@ -22,14 +22,12 @@ Authorization: Bearer <token>
 - Le backend vérifie systématiquement la propriété des fichiers avant :
   - suppression
   - consultation
-  - récupération
 ---
 
 ## 3. Password Security
 
 - Les mots de passe sont hachés avec BCrypt
 - Les mots de passe ne sont pas stockés en clair
-- Les mots de passe ne sont pas renvoyés via API
 
 ---
 

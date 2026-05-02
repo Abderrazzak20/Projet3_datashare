@@ -102,3 +102,12 @@ Conformément au RGPD, l’utilisateur peut :
 - Mots de passe stockés sous forme hashée
 - Accès aux fichiers protégé par token unique
 - Suppression automatique des données expirées
+
+### 🎯 Finalité des données
+Les données sont utilisées uniquement pour :
+- Fournir le service de transfert de fichiers
+- Authentifier les utilisateurs
+- Générer et sécuriser les liens de téléchargement
+
+### 🗑️ Droit à l’oubli
+Une amélioration prévue consiste à permettre à l’utilisateur de demander la suppression complète de son compte et de toutes ses données associées.

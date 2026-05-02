@@ -49,8 +49,6 @@ Les tests fonctionnels vérifient le respect des règles métier :
 - Accès uniquement aux ressources appartenant à l’utilisateur
 - Gestion correcte des fichiers expirés
 - Validation des données utilisateur
-- Comportement des endpoints sécurisés
-
 ---
 
 ### Tests end-to-end (E2E)
@@ -65,8 +63,7 @@ Scénarios testés :
 - Téléchargement du fichier via token
 - Vérification du contenu téléchargé
 - Gestion des erreurs :
-  - login invalide (401)
-  - token de téléchargement invalide (404)
+  - login invalide
 
 Ces tests utilisent MockMvc avec un contexte Spring Boot complet.
 

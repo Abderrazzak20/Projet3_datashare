@@ -18,7 +18,7 @@ DataShare est une application web permettant de téléverser et de partager des 
 - Spring Data JPA
 - JWT 0.11.5
 - Springdoc OpenAPI 2.8.6
-- H2 (test uniquement)
+- H2 (tests unitaires )
 
 ### Base de données
 - PostgreSQL (géré avec pgAdmin)
@@ -79,3 +79,33 @@ chmod +x deploy.sh
 ```
 
 **Note :** Assurez-vous que PostgreSQL est démarré avant l'exécution du script.
+
+## ✨ Fonctionnalités
+
+DataShare permet de téléverser, gérer et partager des fichiers de manière sécurisée grâce à des liens uniques
+
+### 📤 Gestion des fichiers
+- Upload de fichiers par les utilisateurs authentifiés
+- Génération automatique d’un lien unique de téléchargement
+- Téléchargement via lien public sécurisé
+- Suppression manuelle des fichiers
+
+### 👤 Gestion des utilisateurs
+- Inscription et authentification sécurisée
+- Connexion via JWT (token d’accès)
+- Accès à un espace personnel ("Mon espace")
+
+### ⏱️ Gestion des fichiers temporaires
+- Définition d’une durée de validité pour chaque fichier
+- Expiration automatique des fichiers
+- Suppression des fichiers expirés par un job backend
+
+### 📚 Suivi et historique
+- Consultation des fichiers uploadés
+- Accès aux liens générés
+- Gestion des fichiers depuis l’espace utilisateur
+
+### 🔐 Sécurité
+- Authentification basée sur JWT
+- Mots de passe chiffrés
+- Accès protégé aux ressources
