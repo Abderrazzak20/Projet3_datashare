@@ -47,6 +47,7 @@ Authorization: Bearer <token>
   - `/api/login`
   - `/api/register`
   - `/api/files/download/{token}`
+  - `/api/files/info/**`
 
 ---
 

@@ -35,6 +35,6 @@ export class FileService {
   }
 
   getFileToken(token: string): Observable<UserFileDTO> {
-    return this.http.get<UserFileDTO>(`${this.baseUrl}/info/${token}`,{headers: this.getAuthHeaders()});
+    return this.http.get<UserFileDTO>(`${this.baseUrl}/info/${token}`);
   }
 }

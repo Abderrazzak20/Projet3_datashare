@@ -56,7 +56,7 @@ public class SpringSecurityConfig {
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(daoAuthenticationProvider())
             .authorizeHttpRequests(auth -> auth
-              .requestMatchers("/api/register", "/api/login","/api/files/download/**").permitAll()
+              .requestMatchers("/api/register", "/api/login","/api/files/download/**","/api/files/info/**").permitAll()
               .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             )
