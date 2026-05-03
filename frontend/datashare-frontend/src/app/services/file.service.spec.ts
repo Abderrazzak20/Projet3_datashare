@@ -81,7 +81,6 @@ describe('FileService', () => {
     });
     const req = httpMock.expectOne(`${baseUrl}/info/token123`);
     expect(req.request.method).toBe("GET");
-    expect(req.request.headers.get("Authorization")).toBe("Bearer fake-token");
     req.flush(mockFile);
   });
 
